@@ -150,6 +150,16 @@
       1px 2px 0 rgba(168,120,62,0.12),
       2px 4px 10px rgba(30,27,22,0.12);
   }
+  @media (max-width: 680px) {
+    h1 { font-size: 42px; text-shadow: none; }
+  }
+  @media (hover: none), (pointer: coarse) {
+    .tilt {
+      transform: none !important;
+      transition: none !important;
+    }
+    .tilt-sheen { display: none !important; }
+  }
   .subtitle {
     font-size: 18px;
     color: #5C554A;
@@ -393,6 +403,8 @@
 
   <script>
     (function () {
+      var canHover = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      if (!canHover) return;
       var els = document.querySelectorAll('.tilt');
       var maxTilt = 9;
       els.forEach(function (el) {
