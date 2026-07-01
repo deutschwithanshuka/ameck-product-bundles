@@ -20,21 +20,54 @@
   header {
     background: #1E1B16;
     color: #F6F3EE;
-    padding: 20px 40px;
+    padding: 16px 24px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 10px 20px;
   }
   header .brand {
     font-weight: 700;
     letter-spacing: 0.08em;
     font-size: 15px;
+    white-space: nowrap;
   }
   header .contact {
     font-size: 13px;
     color: #C9C2B4;
     display: flex;
-    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+  header .contact a {
+    color: #C9C2B4;
+    text-decoration: none;
+  }
+  header .contact a:hover {
+    color: #F6F3EE;
+    text-decoration: underline;
+  }
+  header .whatsapp-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #3DBD5D;
+    color: #1E1B16 !important;
+    font-weight: 700;
+    font-size: 12px;
+    padding: 7px 14px;
+    border-radius: 20px;
+    text-decoration: none !important;
+    white-space: nowrap;
+  }
+  header .whatsapp-btn:hover {
+    background: #34a352;
+  }
+  @media (max-width: 520px) {
+    header { padding: 14px 18px; }
+    header .contact { font-size: 12px; gap: 10px; }
   }
   main {
     max-width: 1100px;
@@ -192,8 +225,9 @@
   <header>
     <div class="brand">AMECK HOUSE</div>
     <div class="contact">
-      <span>ameckhouse.com</span>
-      <span>info@ameckhouse.com</span>
+      <a href="https://www.ameckhouse.com" target="_blank" rel="noopener">www.ameckhouse.com</a>
+      <a href="mailto:info@ameckhouse.com">info@ameckhouse.com</a>
+      <a class="whatsapp-btn" href="https://wa.me/918302192742" target="_blank" rel="noopener">WhatsApp</a>
     </div>
   </header>
 
