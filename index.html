@@ -87,17 +87,31 @@
     overflow: hidden;
     padding-bottom: 10px;
   }
-  .hero::before {
+  .hero::before, .hero::after {
     content: '';
     position: absolute;
-    inset: -20% -10% auto -10%;
-    height: 480px;
-    background:
-      radial-gradient(circle at 20% 10%, rgba(168,120,62,0.16), transparent 45%),
-      radial-gradient(circle at 80% 30%, rgba(168,120,62,0.12), transparent 50%),
-      radial-gradient(circle at 50% 0%, rgba(30,27,22,0.05), transparent 60%);
+    inset: -30% -20% auto -20%;
+    height: 560px;
     pointer-events: none;
     z-index: 0;
+  }
+  .hero::before {
+    background:
+      radial-gradient(circle at 20% 10%, rgba(168,120,62,0.20), transparent 45%),
+      radial-gradient(circle at 80% 30%, rgba(168,120,62,0.14), transparent 50%),
+      radial-gradient(circle at 50% 0%, rgba(30,27,22,0.06), transparent 60%);
+    animation: meshDrift 16s ease-in-out infinite alternate;
+  }
+  .hero::after {
+    background:
+      radial-gradient(circle at 65% 15%, rgba(61,189,93,0.08), transparent 40%),
+      radial-gradient(circle at 30% 35%, rgba(168,120,62,0.10), transparent 45%);
+    animation: meshDrift 20s ease-in-out infinite alternate-reverse;
+  }
+  @keyframes meshDrift {
+    0%   { transform: translate(0, 0) scale(1); }
+    50%  { transform: translate(3%, 2%) scale(1.06); }
+    100% { transform: translate(-3%, -1%) scale(1); }
   }
   main {
     max-width: 1100px;
@@ -131,6 +145,10 @@
     letter-spacing: -0.01em;
     margin-bottom: 12px;
     line-height: 1.05;
+    text-shadow:
+      0px 1px 0 rgba(255,255,255,0.6),
+      1px 2px 0 rgba(168,120,62,0.12),
+      2px 4px 10px rgba(30,27,22,0.12);
   }
   .subtitle {
     font-size: 18px;
@@ -154,13 +172,14 @@
     color: inherit;
     display: block;
     box-shadow: 0 14px 28px rgba(30,27,22,0.14), 0 2px 6px rgba(30,27,22,0.08);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
     border: 1px solid #EAE5DA;
     transform-style: preserve-3d;
+    transform: perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(var(--ty, 0px)) scale(var(--tscale, 1));
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.5s ease;
   }
-  .card:hover {
-    transform: translateY(-8px) rotateX(3deg) rotateY(-3deg) scale(1.015);
-    box-shadow: 0 26px 44px rgba(30,27,22,0.22), 0 6px 14px rgba(30,27,22,0.10);
+  .card.is-active {
+    transition: transform 0.06s linear;
+    box-shadow: 0 30px 50px rgba(30,27,22,0.24), 0 8px 16px rgba(30,27,22,0.12);
   }
   .card-media {
     position: relative;
@@ -195,6 +214,16 @@
     color: #F6F3EE;
   }
   .card-media .glyph svg { width: 26px; height: 26px; filter: drop-shadow(0 2px 3px rgba(0,0,0,0.4)); }
+  .tilt-sheen {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,0.45), transparent 55%);
+    mix-blend-mode: overlay;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+  .is-active .tilt-sheen { opacity: 1; }
   .card-body { padding: 20px 22px 24px; }
   .card-body h2 {
     font-family: 'Source Serif 4', serif;
@@ -241,12 +270,13 @@
       radial-gradient(circle at 85% 80%, rgba(168,120,62,0.25), transparent 45%),
       linear-gradient(120deg, #1E1B16 0%, #2E281F 55%, #3A2E1E 100%);
     box-shadow: 0 18px 40px rgba(30,27,22,0.24), 0 4px 10px rgba(30,27,22,0.12);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
     transform-style: preserve-3d;
+    transform: perspective(1200px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(var(--ty, 0px)) scale(var(--tscale, 1));
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.5s ease;
   }
-  .trend-banner:hover {
-    transform: translateY(-6px) rotateX(2deg) scale(1.01);
-    box-shadow: 0 30px 54px rgba(30,27,22,0.30), 0 8px 18px rgba(30,27,22,0.16);
+  .trend-banner.is-active {
+    transition: transform 0.06s linear;
+    box-shadow: 0 34px 60px rgba(30,27,22,0.32), 0 10px 20px rgba(30,27,22,0.16);
   }
   .trend-live {
     display: inline-flex;
@@ -325,7 +355,7 @@
       <p class="subtitle">Browse our product catalogues by category — sourced globally, priced for wholesale.</p>
 
       <div class="grid">
-        <a class="card" href="eyewear/">
+        <a class="card tilt" href="eyewear/">
           <div class="card-media">
             <span class="badge">18 Styles</span>
             <div class="glyph">
@@ -343,20 +373,52 @@
             <p>18 Styles · Sunglasses &amp; Optical</p>
             <div class="card-cta">View catalogue →</div>
           </div>
+          <div class="tilt-sheen"></div>
         </a>
       </div>
 
       <div class="trend-section">
-        <a class="trend-banner" href="https://ameckhouse.com/collections/all-products" target="_blank" rel="noopener">
+        <a class="trend-banner tilt" href="https://ameckhouse.com/collections/all-products" target="_blank" rel="noopener">
           <div class="trend-live"><span class="dot"></span>Live on ameckhouse.com</div>
           <h2>Discover more global trending products</h2>
           <p>Explore our full, constantly-updated range of sourced products beyond this catalogue — bags, accessories, and more curated from global trends.</p>
           <span class="trend-cta">Browse all products →</span>
+          <div class="tilt-sheen"></div>
         </a>
       </div>
     </main>
   </div>
 
   <footer>© Ameck House. All rights reserved.</footer>
+
+  <script>
+    (function () {
+      var els = document.querySelectorAll('.tilt');
+      var maxTilt = 9;
+      els.forEach(function (el) {
+        el.addEventListener('mousemove', function (e) {
+          var rect = el.getBoundingClientRect();
+          var px = (e.clientX - rect.left) / rect.width;
+          var py = (e.clientY - rect.top) / rect.height;
+          var rx = (0.5 - py) * (maxTilt * 2);
+          var ry = (px - 0.5) * (maxTilt * 2);
+          el.style.setProperty('--rx', rx.toFixed(2) + 'deg');
+          el.style.setProperty('--ry', ry.toFixed(2) + 'deg');
+          el.style.setProperty('--ty', '-6px');
+          el.style.setProperty('--tscale', '1.02');
+          el.style.setProperty('--mx', (px * 100).toFixed(1) + '%');
+          el.style.setProperty('--my', (py * 100).toFixed(1) + '%');
+          el.classList.add('is-active');
+        });
+        el.addEventListener('mouseleave', function () {
+          el.classList.remove('is-active');
+          el.style.setProperty('--rx', '0deg');
+          el.style.setProperty('--ry', '0deg');
+          el.style.setProperty('--ty', '0px');
+          el.style.setProperty('--tscale', '1');
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
