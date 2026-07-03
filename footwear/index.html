@@ -135,10 +135,7 @@ function renderGrid(){
   if(!list.length){grid.innerHTML='<div class="empty">No styles match your search.</div>';return;}
   grid.innerHTML=list.map(function(p){
     return '<div class="card" data-id="'+p.id+'">'
-      +'<div class="frame"><span class="num">'+p.serial+'</span><img src="'+p.images[0]+'" alt="'+p.name+'" loading="lazy"></div>'
-      +'<div class="cap"><span class="name">'+p.name+'</span><span class="wa-chip">Enquire</span></div>'
-      +'<span class="cat-label">'+p.category+'</span>'
-      +(p.description? '<span class="short-desc">'+p.description+'</span>' : '')+'</div>';
+      +'<div class="frame"><span class="num">'+p.serial+'</span><img src="'+p.images[0]+'" alt="'+p.name+'" loading="lazy"></div></div>';
   }).join('');
   grid.querySelectorAll('.card').forEach(function(c){c.addEventListener('click',function(){openModal(c.dataset.id);});});
 }
