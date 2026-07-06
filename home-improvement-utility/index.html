@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ameck House Home Improvement and Utility Catalogue</title>
+<meta property="og:title" content="Ameck House Home Improvement and Utility Catalogue">
+<meta property="og:description" content="Wholesale export catalogue: cushions, throws, ceramics, vases, organizers, waste bins, travel bottles and everyday gadgets.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#EAE6DE;--panel:#F5F2EC;--ink:#2E2A24;--muted:#7A7167;--line:#D8D1C4;--accent:#8B6F47;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--ink);font-family:'Jost',-apple-system,BlinkMacSystemFont,sans-serif;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:1180px;margin:0 auto;padding:64px 32px 40px;}
+header{text-align:center;margin-bottom:44px;}
+.logo{font-family:'Playfair Display',serif;font-size:56px;line-height:1;letter-spacing:.5px;}
+.logo em{font-style:italic;font-weight:400;} .logo b{font-style:normal;font-weight:600;margin-left:10px;}
+.tagline{margin-top:14px;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);}
+.contact-row{margin-top:18px;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px;font-size:12.5px;color:var(--muted);}
+.contact-row a{color:var(--ink);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .15s,color .15s;}
+.contact-row a:hover{border-bottom-color:var(--accent);color:var(--accent);} .contact-row .dot{color:var(--line);}
+.controls{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px 22px;margin:0 auto 48px;padding-bottom:28px;border-bottom:1px solid var(--line);}
+.cats{display:flex;flex-wrap:wrap;gap:8px 18px;justify-content:center;}
+.cat-btn{background:none;border:none;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);cursor:pointer;padding:6px 2px;border-bottom:1px solid transparent;transition:color .15s,border-color .15s;}
+.cat-btn:hover{color:var(--ink);} .cat-btn.active{color:var(--ink);border-bottom-color:var(--accent);}
+#search{width:220px;background:transparent;border:none;border-bottom:1px solid var(--line);font-family:'Jost',sans-serif;font-size:13px;color:var(--ink);padding:6px 4px;outline:none;}
+#search::placeholder{color:var(--muted);} #search:focus{border-bottom-color:var(--accent);}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px 28px;perspective:1400px;}
+.card{cursor:pointer;transition:transform .35s cubic-bezier(.2,.8,.2,1);}
+.card:hover{transform:translateY(-8px);}
+.card .frame{position:relative;background:var(--panel);aspect-ratio:1/1;overflow:hidden;border:1px solid var(--line);box-shadow:0 1px 2px rgba(46,42,36,.06),0 10px 24px rgba(46,42,36,.08);transition:box-shadow .35s ease;}
+.card:hover .frame{box-shadow:0 4px 10px rgba(46,42,36,.12),0 24px 46px rgba(46,42,36,.20);}
+.card img{width:100%;height:100%;object-fit:contain;object-position:center;display:block;transition:transform .6s ease;}
+.card:hover img{transform:scale(1.06);}
+.card .num{position:absolute;top:10px;left:12px;font-family:'Playfair Display',serif;font-style:italic;font-size:14px;color:var(--ink);background:rgba(245,242,236,.9);padding:1px 9px;border-radius:2px;box-shadow:0 2px 6px rgba(46,42,36,.12);}
+.empty{grid-column:1/-1;text-align:center;padding:60px 0;color:var(--muted);font-family:'Playfair Display',serif;font-style:italic;}
+footer{text-align:center;margin-top:80px;padding-top:28px;border-top:1px solid var(--line);}
+footer .site{font-family:'Playfair Display',serif;font-style:italic;font-size:15px;color:var(--ink);}
+footer .sub{margin-top:8px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);}
+footer .foot-links{margin-top:18px;display:flex;justify-content:center;gap:22px;flex-wrap:wrap;}
+footer .foot-links a{font-size:12px;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px;transition:border-color .15s,color .15s;}
+footer .foot-links a:hover{color:var(--accent);border-color:var(--accent);}
+.overlay{display:none;position:fixed;inset:0;background:rgba(46,42,36,.55);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);z-index:1000;align-items:center;justify-content:center;padding:28px;opacity:0;transition:opacity .25s ease;}
+.overlay.open{display:flex;opacity:1;}
+.modal{background:var(--panel);max-width:960px;width:100%;max-height:88vh;overflow-y:auto;border:1px solid var(--line);border-radius:2px;position:relative;box-shadow:0 20px 40px rgba(46,42,36,.18),0 40px 90px rgba(46,42,36,.30);transform:translateY(14px) scale(.98);transition:transform .3s cubic-bezier(.2,.8,.2,1);}
+.overlay.open .modal{transform:translateY(0) scale(1);}
+.modal-close{position:absolute;top:16px;right:18px;background:none;border:none;font-size:22px;color:var(--ink);cursor:pointer;z-index:2;line-height:1;}
+.modal-body{display:grid;grid-template-columns:1fr 1fr;gap:0;}
+.modal-media{background:#fff;padding:28px;}
+.modal-main-img{width:100%;aspect-ratio:1/1;object-fit:contain;object-position:center;background:#fafafa;}
+.thumbs{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;}
+.thumbs img{width:56px;height:56px;object-fit:contain;object-position:center;cursor:pointer;border:1px solid var(--line);opacity:.7;background:#fafafa;}
+.thumbs img.active{opacity:1;border-color:var(--accent);}
+.modal-info{padding:40px 36px;}
+.modal-info .serial{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);}
+.modal-info h2{font-family:'Playfair Display',serif;font-weight:500;font-size:26px;margin:8px 0 20px;}
+.modal-info h4{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin:22px 0 8px;}
+.modal-info h4:first-of-type{margin-top:0;}
+.desc-text{font-size:13px;line-height:1.7;color:var(--ink);}
+.swatches{display:flex;flex-wrap:wrap;gap:8px;}
+.swatch{font-size:12px;padding:5px 12px;border:1px solid var(--line);color:var(--ink);}
+.wa-btn{display:inline-block;margin-top:28px;padding:12px 26px;background:var(--ink);color:#fff;text-decoration:none;font-size:13px;letter-spacing:1px;text-transform:uppercase;transition:background .2s;}
+.wa-btn:hover{background:var(--accent);}
+.enquire-note{margin-top:10px;font-size:11.5px;color:var(--muted);line-height:1.6;}
+@media (max-width:860px){.grid{grid-template-columns:repeat(2,1fr);} .logo{font-size:42px;}}
+@media (max-width:720px){.modal-body{grid-template-columns:1fr;} .overlay{padding:0;align-items:flex-end;} .modal{max-height:94vh;border-radius:14px 14px 0 0;} .modal-media,.modal-info{padding:22px;} .thumbs{flex-wrap:nowrap;overflow-x:auto;} .thumbs img{flex:0 0 auto;}}
+@media (max-width:520px){.grid{grid-template-columns:1fr 1fr;gap:22px 14px;} .wrap{padding:40px 16px 26px;} .logo{font-size:34px;} .cat-btn{font-size:12px;padding:8px 2px;} #search{width:150px;font-size:16px;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo"><em>Ameck</em><b>House</b></div>
+    <div class="tagline">Wholesale Home Improvement &amp; Utility Catalogue</div>
+    <div class="contact-row">
+      <a href="https://ameckhouse.com/" target="_blank" rel="noopener">ameckhouse.com</a>
+      <span class="dot">·</span>
+      <a href="mailto:info@ameckhouse.com">info@ameckhouse.com</a>
+      <span class="dot">·</span>
+      <a href="https://wa.me/918302192742" target="_blank" rel="noopener">WhatsApp Us</a>
+    </div>
+  </header>
+  <div class="controls">
+    <div class="cats" id="cats"></div>
+    <div class="search-wrap"><input id="search" type="text" placeholder="Search styles…"></div>
+  </div>
+  <p style="max-width:640px;margin:-24px auto 40px;text-align:center;font-size:12px;line-height:1.6;color:var(--muted);">Prices on request. Tap any style to enquire directly on WhatsApp with the product link included.</p>
+  <div class="grid" id="grid"></div>
+  <footer>
+    <div class="site">catalogue.ameckhouse.com</div>
+    <div class="sub">Home Improvement &amp; Utility Collection · Export Enquiries Welcome</div>
+    <div class="foot-links">
+      <a href="https://ameckhouse.com/" target="_blank" rel="noopener">Visit Website</a>
+      <a href="mailto:info@ameckhouse.com">Email Us</a>
+      <a href="https://wa.me/918302192742" target="_blank" rel="noopener">WhatsApp Us</a>
+    </div>
+  </footer>
+</div>
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <button class="modal-close" id="modalClose">&times;</button>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+<script>
+const PRODUCTS = [{"id":"apple-shape-plush-cushion-soft-toy-pillow-cute-decorative-fruit-cushion","serial":"HD-001","name":"Apple Shape Plush Cushion","category":"Cushions","handle":"apple-shape-plush-cushion-soft-toy-pillow-cute-decorative-fruit-cushion","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0420_3.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0420_2.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot-3_2.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot-4_2.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot-1_85de37d6-a48d-4989-9fce-6e757710db3e.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0420.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot-2_6441344a-f3ce-4272-8e86-582432b018c5.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0420_1.jpg"],"colors":["Green","Yellow","Red"],"sizes":["40x30 cm","50x40 cm","60x50 cm"],"description":"Cute apple-shape plush cushion in ultra-soft fabric with cotton filling, perfect for sofa, bed or nursery styling."},{"id":"premium-sherpa-fleece-blanket-130x160","serial":"HD-002","name":"Sherpa Fleece Blanket","category":"Textiles","handle":"premium-sherpa-fleece-blanket-130x160","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/imgi_122_22158890629_1805383331.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/imgi_121_22158914194_1805383331.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/imgi_120_22069873520_1805383331.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/imgi_119_21987507957_1805383331.jpg"],"colors":["Camel","Coffee Brown","Navy Blue","Grey"],"sizes":["130 x 160 cm"],"description":"Double-layer Sherpa fleece throw blanket, ultra-soft and warm, ideal for sofa, bed, travel or office use in all seasons."},{"id":"artisan-reactive-glaze-ceramic-coffee-mugs-set-of-2-handmade-stoneware","serial":"HD-003","name":"Reactive Glaze Ceramic Mugs, Set of 2","category":"Tableware","handle":"artisan-reactive-glaze-ceramic-coffee-mugs-set-of-2-handmade-stoneware","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0420_d9b377ef-d989-4dee-90ee-dfd5d8dfcee6.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0420_1_2d5f9198-d174-4ae9-b94e-30cabe3c27cc.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0420_5_-Copy.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0420_3_aee8ae46-d31b-4b5e-9ff0-23b0fa5eef05.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/O1CN01xsqegv1HUaXJuK2W3__2217009600761-0-cib.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0420_4.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/O1CN010Gj1VU1HUaXJuI1jN__2217009600761-0-cib.jpg"],"colors":["Teal Green","Midnight Purple"],"sizes":["Set of 2","Single"],"description":"Handmade reactive-glaze stoneware mugs, each piece uniquely fired in rich teal and midnight purple tones. Set of 2."},{"id":"minimalist-ribbed-ceramic-vase-white-home-decor-vase","serial":"HD-004","name":"Ribbed Ceramic Vase","category":"Vases","handle":"minimalist-ribbed-ceramic-vase-white-home-decor-vase","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0420_6.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0420_7.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0420_9.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/O1CN01Pg2xJe1PbvlHrS4d1__2220317601860-0-cib.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/O1CN01BJ413T1PbvlIKSqDe__2220317601860-0-cib.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0420_8.jpg"],"colors":["White"],"sizes":["Small","Medium","Large","Three-Piece Set"],"description":"Minimalist ribbed ceramic vase in matte white, ideal for fresh or dried arrangements on any tabletop or shelf."},{"id":"bamboo-rattan-countertop-storage-rack-multi-layer-kitchen-organizer-shelf-for-desktop-dining-table-pantry-2-3-4-tier","serial":"HD-005","name":"Bamboo & Rattan Countertop Storage Rack","category":"Organizers","handle":"bamboo-rattan-countertop-storage-rack-multi-layer-kitchen-organizer-shelf-for-desktop-dining-table-pantry-2-3-4-tier","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0421_22.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0421_20.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0421_12.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0421_17.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0421_18.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0422_4.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0422_5.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0422.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0421_14.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0421_15.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0421_19.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0422_2.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0422_3.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0422_6.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0421_24.jpg"],"colors":[],"sizes":["2-Tier","3-Tier","4-Tier"],"description":"Multi-layer bamboo and rattan-style countertop organizer for kitchen, pantry or desk, in 2, 3 and 4 tier configurations."},{"id":"ribbed-open-top-waste-bin-minimalist-cream-style-trash-can-for-home-office-nordic-gray-cream-yellow","serial":"HD-006","name":"Ribbed Open-Top Waste Bin","category":"Utility","handle":"ribbed-open-top-waste-bin-minimalist-cream-style-trash-can-for-home-office-nordic-gray-cream-yellow","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0421.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0421_1.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0421_6.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0421_5.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0421_3.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0421_2.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0421_4.jpg"],"colors":["Nordic Gray","Cream Yellow"],"sizes":["Medium","Large","Extra Large"],"description":"Open-top ribbed barrel waste bin in durable virgin plastic, 10L capacity, ideal for bedroom, bathroom, kitchen or office use."},{"id":"premium-double-barrel-bathroom-trash-can-push-top-oval-waste-bin-with-inner-bucket","serial":"HD-007","name":"Double Barrel Push-Top Trash Can","category":"Utility","handle":"premium-double-barrel-bathroom-trash-can-push-top-oval-waste-bin-with-inner-bucket","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0421_8.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0421_7.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0421_10.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0421_11.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0421_9.jpg"],"colors":["Cream White","Medieval Green","Anchor Red"],"sizes":["12L"],"description":"Push-top oval waste bin with concealed double-barrel inner and outer design for a seamless, hotel-grade finish in bathroom or bedroom."},{"id":"4-in-1-travel-dispensing-bottle-set-refillable-leak-proof","serial":"HD-008","name":"4-in-1 Travel Dispensing Bottle Set","category":"Utility","handle":"4-in-1-travel-dispensing-bottle-set-refillable-leak-proof","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0428_11.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0428_10.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0428_6.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0428.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0428_12.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0428_5.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0428_7.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0428_13.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0428_9.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0428_3.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0428_8.jpg"],"colors":["Off-White","Green"],"sizes":["30ml x 4"],"description":"Refillable, leak-proof 4-in-1 travel dispensing bottle set for shampoo, conditioner, shower gel and cleanser, carry-on compliant."},{"id":"n15-portable-rechargeable-handheld-fan-5-speed-800mah-aromatherapy","serial":"HD-009","name":"N15 Portable Handheld Fan","category":"Gadgets","handle":"n15-portable-rechargeable-handheld-fan-5-speed-800mah-aromatherapy","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0430.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0430_4.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0430_5.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0430_8.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0430_2.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0430_10.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0430_7.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0430_9.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0430_6.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0430_3.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0430_1.jpg"],"colors":["Xuefeng White","Cherry Blossom Powder","Violet","Dark Night Green","Deep Sea Blue"],"sizes":[],"description":"Foldable USB-rechargeable handheld fan with 5 wind speeds, 800mAh battery, LED display and built-in aromatherapy support."},{"id":"m11-brushless-handheld-fan-variable-speed-silent-type-c","serial":"HD-010","name":"M11 Brushless Handheld Fan","category":"Gadgets","handle":"m11-brushless-handheld-fan-variable-speed-silent-type-c","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0430_16.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0430_14.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0430_12.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0430_11.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0430_15.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0430_13.jpg"],"colors":["White","Gray","Gold","Green"],"sizes":[],"description":"Brushless-motor handheld fan with continuously variable speed, near-silent under 36dB operation and Type-C fast charging."},{"id":"electric-scalp-head-massager-rechargeable-cervical-neck-relief","serial":"HD-011","name":"Electric Scalp Head Massager","category":"Gadgets","handle":"electric-scalp-head-massager-rechargeable-cervical-neck-relief","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/O1CN01YQr9f92IwMGVzeUSv__2370169350-0-cib.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/O1CN013nKiNz2IwM7Pic2Lk__2370169350-0-cib_3efc7953-8614-4463-8c4c-93d1fdcdcdb5.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0427_21.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0427_23.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0427_30.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0427_33.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0427_27.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0427_34.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0427_36.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/O1CN01g0cOT02IwM3cd6fPM__2370169350-0-cib_1.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0427_24.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0427_20.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0427_32.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0427_12.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0427_16.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0427_13.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0427_17.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0427_29.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0427_19.jpg"],"colors":["Glossy White","Frosted Blue","Electroplated Cherry Blossom Powder","Blue & White Porcelain","Frosted Chinese Red","Frosted Fragrant Powder","Silver Blue & White Porcelain"],"sizes":[],"description":"Rechargeable electric scalp and head massager with multi-point kneading for scalp, cervical spine and shoulders; select variants waterproof with light therapy."},{"id":"phomemo-p15-bluetooth-label-printer-retro-portable-mini","serial":"HD-012","name":"Phomemo P15 Bluetooth Label Printer","category":"Gadgets","handle":"phomemo-p15-bluetooth-label-printer-retro-portable-mini","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0428_20.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0428_17.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/O1CN01zoMudD1QjXtQCZJLo__2215046682012-0-cib.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0428_16.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0428_14.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0428_19.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0428_15.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0428_18.jpg"],"colors":["Retro Red","Retro Green"],"sizes":[],"description":"Pocket-sized Bluetooth thermal label printer, 203 DPI, ink-free crisp printing, compatible with iOS, Android and Windows."}];
+const WA = '918302192742';
+const grid=document.getElementById('grid'),catsEl=document.getElementById('cats'),searchEl=document.getElementById('search'),overlay=document.getElementById('overlay'),modalBody=document.getElementById('modalBody');
+let activeCat='All';
+function waLink(p){
+  var productUrl='https://ameckhouse.com/products/'+p.handle;
+  var msg=encodeURIComponent("Hi Ameck House, I'd like the wholesale price for "+p.serial+" - "+p.name+". "+productUrl);
+  return 'https://wa.me/'+WA+'?text='+msg;
+}
+function renderCats(){
+  var cats=['All'].concat(Array.from(new Set(PRODUCTS.map(function(p){return p.category;}))));
+  catsEl.innerHTML=cats.map(function(c){return '<button class="cat-btn'+(c===activeCat?' active':'')+'" data-cat="'+c+'">'+c+'</button>';}).join('');
+  catsEl.querySelectorAll('.cat-btn').forEach(function(b){b.addEventListener('click',function(){activeCat=b.dataset.cat;renderCats();renderGrid();});});
+}
+function matches(p){
+  var q=searchEl.value.trim().toLowerCase();
+  var catOk=activeCat==='All'||p.category===activeCat;
+  var qOk=!q||p.name.toLowerCase().indexOf(q)>=0||p.serial.toLowerCase().indexOf(q)>=0||p.category.toLowerCase().indexOf(q)>=0;
+  return catOk&&qOk;
+}
+function renderGrid(){
+  var list=PRODUCTS.filter(matches);
+  if(!list.length){grid.innerHTML='<div class="empty">No styles match your search.</div>';return;}
+  grid.innerHTML=list.map(function(p){
+    return '<div class="card" data-id="'+p.id+'">'
+      +'<div class="frame"><span class="num">'+p.serial+'</span><img src="'+p.images[0]+'" alt="'+p.name+'" loading="lazy"></div></div>';
+  }).join('');
+  grid.querySelectorAll('.card').forEach(function(c){c.addEventListener('click',function(){openModal(c.dataset.id);});});
+}
+function openModal(id){
+  var p=PRODUCTS.find(function(x){return x.id===id;}); if(!p) return;
+  var descHtml=p.description? '<div class="desc-text">'+p.description+'</div>' : '';
+  var colorsHtml=p.colors.length? '<h4>Colours</h4><div class="swatches">'+p.colors.map(function(c){return '<span class="swatch">'+c+'</span>';}).join('')+'</div>' : '';
+  var sizesHtml=p.sizes.length? '<h4>Sizes</h4><div class="swatches">'+p.sizes.map(function(s){return '<span class="swatch">'+s+'</span>';}).join('')+'</div>' : '';
+  modalBody.innerHTML='<div class="modal-media"><img class="modal-main-img" id="mainImg" src="'+p.images[0]+'" alt="'+p.name+'"><div class="thumbs" id="thumbs"></div></div>'
+    +'<div class="modal-info"><div class="serial">'+p.serial+'</div><h2>'+p.name+'</h2>'
+    +descHtml+colorsHtml+sizesHtml
+    +'<a class="wa-btn" href="'+waLink(p)+'" target="_blank" rel="noopener">Enquire on WhatsApp</a>'
+    +'<div class="enquire-note">Price on request. Tapping the button opens WhatsApp with this style\'s link pre-filled so our team can quote you directly.</div></div>';
+  var thumbsEl=modalBody.querySelector('#thumbs'), mainImg=modalBody.querySelector('#mainImg');
+  thumbsEl.innerHTML=p.images.map(function(src,i){return '<img data-idx="'+i+'" src="'+src+'" class="'+(i===0?'active':'')+'">';}).join('');
+  thumbsEl.querySelectorAll('img').forEach(function(el){el.addEventListener('click',function(){
+    mainImg.src=el.src; thumbsEl.querySelectorAll('img').forEach(function(t){t.classList.remove('active');}); el.classList.add('active');
+  });});
+  overlay.classList.add('open');
+}
+function closeModal(){overlay.classList.remove('open');modalBody.innerHTML='';}
+document.getElementById('modalClose').addEventListener('click',closeModal);
+overlay.addEventListener('click',function(e){if(e.target===overlay)closeModal();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
+searchEl.addEventListener('input',renderGrid);
+renderCats(); renderGrid();
+</script>
+</body>
+</html>
