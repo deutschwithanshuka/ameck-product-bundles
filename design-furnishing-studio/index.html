@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ameck House Design and Furnishing Studio</title>
+<meta property="og:title" content="Ameck House Design and Furnishing Studio">
+<meta property="og:description" content="Premium furniture and furnishing collection for interior designers, architects and hospitality projects.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#EAE6DE;--panel:#F5F2EC;--ink:#2E2A24;--muted:#7A7167;--line:#D8D1C4;--accent:#8B6F47;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--ink);font-family:'Jost',-apple-system,BlinkMacSystemFont,sans-serif;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:1180px;margin:0 auto;padding:64px 32px 40px;}
+header{text-align:center;margin-bottom:44px;}
+.logo{font-family:'Playfair Display',serif;font-size:56px;line-height:1;letter-spacing:.5px;}
+.logo em{font-style:italic;font-weight:400;} .logo b{font-style:normal;font-weight:600;margin-left:10px;}
+.tagline{margin-top:14px;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);}
+.contact-row{margin-top:18px;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px;font-size:12.5px;color:var(--muted);}
+.contact-row a{color:var(--ink);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .15s,color .15s;}
+.contact-row a:hover{border-bottom-color:var(--accent);color:var(--accent);} .contact-row .dot{color:var(--line);}
+.controls{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px 22px;margin:0 auto 48px;padding-bottom:28px;border-bottom:1px solid var(--line);}
+.cats{display:flex;flex-wrap:wrap;gap:8px 18px;justify-content:center;}
+.cat-btn{background:none;border:none;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);cursor:pointer;padding:6px 2px;border-bottom:1px solid transparent;transition:color .15s,border-color .15s;}
+.cat-btn:hover{color:var(--ink);} .cat-btn.active{color:var(--ink);border-bottom-color:var(--accent);}
+#search{width:220px;background:transparent;border:none;border-bottom:1px solid var(--line);font-family:'Jost',sans-serif;font-size:13px;color:var(--ink);padding:6px 4px;outline:none;}
+#search::placeholder{color:var(--muted);} #search:focus{border-bottom-color:var(--accent);}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px 28px;perspective:1400px;}
+.card{cursor:pointer;transition:transform .35s cubic-bezier(.2,.8,.2,1);}
+.card:hover{transform:translateY(-8px);}
+.card .frame{position:relative;background:var(--panel);aspect-ratio:1/1;overflow:hidden;border:1px solid var(--line);box-shadow:0 1px 2px rgba(46,42,36,.06),0 10px 24px rgba(46,42,36,.08);transition:box-shadow .35s ease;}
+.card:hover .frame{box-shadow:0 4px 10px rgba(46,42,36,.12),0 24px 46px rgba(46,42,36,.20);}
+.card img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform .6s ease;}
+.card:hover img{transform:scale(1.06);}
+.card .num{position:absolute;top:10px;left:12px;font-family:'Playfair Display',serif;font-style:italic;font-size:14px;color:var(--ink);background:rgba(245,242,236,.9);padding:1px 9px;border-radius:2px;box-shadow:0 2px 6px rgba(46,42,36,.12);}
+.empty{grid-column:1/-1;text-align:center;padding:60px 0;color:var(--muted);font-family:'Playfair Display',serif;font-style:italic;}
+footer{text-align:center;margin-top:80px;padding-top:28px;border-top:1px solid var(--line);}
+footer .site{font-family:'Playfair Display',serif;font-style:italic;font-size:15px;color:var(--ink);}
+footer .sub{margin-top:8px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);}
+footer .foot-links{margin-top:18px;display:flex;justify-content:center;gap:22px;flex-wrap:wrap;}
+footer .foot-links a{font-size:12px;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px;transition:border-color .15s,color .15s;}
+footer .foot-links a:hover{color:var(--accent);border-color:var(--accent);}
+.overlay{display:none;position:fixed;inset:0;background:rgba(46,42,36,.55);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);z-index:1000;align-items:center;justify-content:center;padding:28px;opacity:0;transition:opacity .25s ease;}
+.overlay.open{display:flex;opacity:1;}
+.modal{background:var(--panel);max-width:960px;width:100%;max-height:88vh;overflow-y:auto;border:1px solid var(--line);border-radius:2px;position:relative;box-shadow:0 20px 40px rgba(46,42,36,.18),0 40px 90px rgba(46,42,36,.30);transform:translateY(14px) scale(.98);transition:transform .3s cubic-bezier(.2,.8,.2,1);}
+.overlay.open .modal{transform:translateY(0) scale(1);}
+.modal-close{position:absolute;top:16px;right:18px;background:none;border:none;font-size:22px;color:var(--ink);cursor:pointer;z-index:2;line-height:1;}
+.modal-body{display:grid;grid-template-columns:1fr 1fr;gap:0;}
+.modal-media{background:#fff;padding:28px;}
+.modal-main-img{width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center;background:#fafafa;}
+.thumbs{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;}
+.thumbs img{width:56px;height:56px;object-fit:cover;object-position:center;cursor:pointer;border:1px solid var(--line);opacity:.7;background:#fafafa;}
+.thumbs img.active{opacity:1;border-color:var(--accent);}
+.modal-info{padding:40px 36px;}
+.modal-info .serial{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);}
+.modal-info h2{font-family:'Playfair Display',serif;font-weight:500;font-size:26px;margin:8px 0 20px;}
+.modal-info h4{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin:22px 0 8px;}
+.modal-info h4:first-of-type{margin-top:0;}
+.desc-text{font-size:13.5px;line-height:1.7;color:var(--ink);}
+.spec-list{list-style:none;margin:0;padding:0;}
+.spec-list li{position:relative;padding-left:16px;font-size:13px;line-height:1.6;color:var(--ink);margin-bottom:6px;}
+.spec-list li::before{content:"";position:absolute;left:0;top:8px;width:5px;height:5px;background:var(--accent);border-radius:50%;}
+.swatches{display:flex;flex-wrap:wrap;gap:8px;}
+.swatch{font-size:12px;padding:5px 12px;border:1px solid var(--line);color:var(--ink);}
+.shipping-box{margin-top:26px;padding:14px 16px;background:rgba(139,111,71,.08);border-left:2px solid var(--accent);}
+.shipping-box .shipping-title{font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px;}
+.shipping-box .shipping-text{font-size:11.5px;line-height:1.6;color:var(--muted);}
+.wa-btn{display:inline-block;margin-top:22px;padding:12px 26px;background:var(--ink);color:#fff;text-decoration:none;font-size:13px;letter-spacing:1px;text-transform:uppercase;transition:background .2s;}
+.wa-btn:hover{background:var(--accent);}
+.enquire-note{margin-top:10px;font-size:11.5px;color:var(--muted);line-height:1.6;}
+@media (max-width:860px){.grid{grid-template-columns:repeat(2,1fr);} .logo{font-size:42px;}}
+@media (max-width:720px){.modal-body{grid-template-columns:1fr;} .overlay{padding:0;align-items:flex-end;} .modal{max-height:94vh;border-radius:14px 14px 0 0;} .modal-media,.modal-info{padding:22px;} .thumbs{flex-wrap:nowrap;overflow-x:auto;} .thumbs img{flex:0 0 auto;}}
+@media (max-width:520px){.grid{grid-template-columns:1fr 1fr;gap:22px 14px;} .wrap{padding:40px 16px 26px;} .logo{font-size:34px;} .cat-btn{font-size:12px;padding:8px 2px;} #search{width:150px;font-size:16px;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo"><em>Ameck</em><b>House</b></div>
+    <div class="tagline">Design &amp; Furnishing Studio · Curated for Interiors &amp; Architecture</div>
+    <div class="contact-row">
+      <a href="https://ameckhouse.com/" target="_blank" rel="noopener">ameckhouse.com</a>
+      <span class="dot">·</span>
+      <a href="mailto:info@ameckhouse.com">info@ameckhouse.com</a>
+      <span class="dot">·</span>
+      <a href="https://wa.me/918302192742" target="_blank" rel="noopener">WhatsApp Us</a>
+    </div>
+  </header>
+  <div class="controls">
+    <div class="cats" id="cats"></div>
+    <div class="search-wrap"><input id="search" type="text" placeholder="Search pieces…"></div>
+  </div>
+  <p style="max-width:640px;margin:-24px auto 40px;text-align:center;font-size:12px;line-height:1.6;color:var(--muted);">A premium collection for interior designers, architects and hospitality projects. Prices on request; tap any piece to enquire directly on WhatsApp.</p>
+  <div class="grid" id="grid"></div>
+  <footer>
+    <div class="site">catalogue.ameckhouse.com</div>
+    <div class="sub">Design &amp; Furnishing Studio · Trade &amp; Project Enquiries Welcome</div>
+    <div class="foot-links">
+      <a href="https://ameckhouse.com/" target="_blank" rel="noopener">Visit Website</a>
+      <a href="mailto:info@ameckhouse.com">Email Us</a>
+      <a href="https://wa.me/918302192742" target="_blank" rel="noopener">WhatsApp Us</a>
+    </div>
+  </footer>
+</div>
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <button class="modal-close" id="modalClose">&times;</button>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+<script>
+const PRODUCTS = [{"id":"ds-001-black-walnut-upholstered-bed","serial":"DS-001","name":"Black Walnut Upholstered Bed","category":"Bedroom","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/ds001-1.webp","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/ds001-2.webp","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/ds001-3.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/ds001-4.jpg"],"colors":[],"sizes":["1500 x 2000 mm","1800 x 2000 mm"],"intro":"A premium upholstered bed crafted with North American Black Walnut and traditional mortise & tenon joinery. Featuring a minimalist modern design with a soft upholstered headboard, designed for luxury residential interiors, boutique hotels, villas and premium hospitality projects.","specs":["Material: North American Black Walnut","Construction: Mortise & Tenon Joinery","Headboard: Upholstered Cushion Backrest","Style: Modern Minimalist","Finish: Natural Wood Finish"],"configurations":[],"accessories":[],"shippingNote":"Furniture products are shipped exclusively via sea freight; shipping charges are not included in the estimated cost. Final pricing may vary based on shipping destination, order quantity and customization requirements."},{"id":"ds-002-french-style-upholstered-bed","serial":"DS-002","name":"French-Style Upholstered Bed","category":"Bedroom","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/ds002-1.webp","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/ds002-2.webp","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/ds002-3.jpg"],"colors":["Cherry","Black","Walnut"],"sizes":["1500 x 2000 mm","1800 x 2000 mm"],"intro":"A premium French-style upholstered solid wood bed combining timeless elegance with modern functionality. Designed for luxury bedrooms, hospitality projects, villas and premium residential interiors.","specs":["Material: Solid Wood","Headboard: Upholstered Soft Backrest","Style: French Design","Frame: Solid Wood Construction","Build: Knock-Down Construction","Customization available","Installation service available","Suitable for cross-border export"],"configurations":["Standard Frame","Gas Lift Storage","Drawer Storage"],"accessories":[],"shippingNote":"Furniture products are shipped exclusively via sea freight; shipping charges are not included in the estimated cost. Final pricing depends on destination, order quantity and customization requirements."},{"id":"ds-003-italian-leather-storage-bed","serial":"DS-003","name":"Italian-Style Leather Storage Bed","category":"Bedroom","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/ds003-1.webp","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/ds003-2.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/ds003-3.webp","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/ds003-4.jpg"],"colors":[],"sizes":["1500 x 2000 mm","1800 x 2000 mm","2000 x 2200 mm"],"intro":"A premium Italian-style genuine leather upholstered storage bed featuring a soft cushioned headboard and durable wooden frame construction. Designed for luxury homes, premium apartments, hotels and hospitality projects.","specs":["Material: Solid Wood Frame","Upholstery: Genuine Leather","Leather Finish: Embossed","Style: Italian Modern","Headboard: Soft Upholstered Backrest","Built-in Storage","Customization available","Cross-border export ready"],"configurations":["Standard Frame","Three-Drawer Storage","Sliding Storage","Hydraulic Lift Storage"],"accessories":["Smart Bedside Table","Pocket Spring Mattress","Latex Mattress","Skin-Friendly Latex Mattress","Antibacterial Mattress","Cashmere Natural Latex Mattress"],"shippingNote":"Furniture products are shipped exclusively via sea freight; shipping charges are not included in the estimated cost. Final pricing depends on configuration, accessories, destination and order quantity."},{"id":"ds-004-italian-genuine-leather-storage-bed","serial":"DS-004","name":"Italian Genuine Leather Upholstered Storage Bed","category":"Bedroom","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/Screenshot_2026-07-07_at_11.06.10_AM.png","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/Screenshot_2026-07-07_at_11.06.15_AM.png","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/Screenshot_2026-07-07_at_11.06.22_AM.png","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/Screenshot_2026-07-07_at_11.06.36_AM.png"],"colors":[],"sizes":["1500 x 2000 mm","1800 x 2000 mm","2000 x 2200 mm"],"intro":"A premium Italian-style genuine leather upholstered storage bed with a channel-tufted wingback headboard and brass accent detail. Designed for luxury bedrooms, premium apartments, hotels and hospitality projects.","specs":["Material: Solid Wood Frame","Upholstery: Genuine Leather","Headboard: Channel-Tufted Wingback with Brass Accent","Style: Italian Modern","Built-in Storage","Customization available","Cross-border export ready"],"configurations":["Frame Structure","Hydraulic Storage Structure"],"accessories":["Available with Three-Drawer Cabinet or Sliding Cabinet","Choice of Pocket Spring, Latex, Skin-Friendly Latex, Antibacterial or Cashmere Natural Latex Mattress","14 bed + cabinet + mattress package combinations available — enquire for the full package list and pricing"],"shippingNote":"Furniture products are shipped exclusively via sea freight; shipping charges are not included in the estimated cost. Final pricing depends on configuration, package selection, destination and order quantity."},{"id":"ds-005-bubble-floating-bed","serial":"DS-005","name":"Bubble Floating Bed with Bedside Cabinets","category":"Bedroom","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot-2.png","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot-1_3a94ecf5-a7b2-42d1-89fe-ce0d8a4322e0.png","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot-1_88a70b8b-c91d-4228-b553-5ace40ea752f.png","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot-1.png"],"colors":["Blush Pink","Navy Blue","Ivory Boucle"],"sizes":["1500 x 2000 mm","1800 x 2000 mm","2000 x 2200 mm"],"intro":"A premium bubble-inspired floating bed featuring a solid wood frame, soft lamb fleece upholstery, high-density 45D foam cushioning, and an integrated silent slatted support system. Designed in a contemporary Wabi-Sabi style, offering exceptional comfort, durability and a distinctive sculptural appearance for premium residential and hospitality interiors.","specs":["Style: Wabi-Sabi / Modern Luxury","Product Type: Floating Upholstered Bed","Frame Material: Imported Solid Wood","Upholstery: Premium Lamb Fleece Fabric","Padding: High-Resilience 45D Foam","Support System: 20 cm Silent Slatted Bed Base","Headboard Height: 90 cm","Overall Dimensions: 222 x 256 x 90 cm","Assembly: Knock-Down","Cross-border export ready"],"configurations":[],"accessories":["Bed Only","Bed + 1 Solid Wood Bedside Cabinet","Bed + 2 Solid Wood Bedside Cabinets","Bed + Premium Lamb Fleece Mattress","Bed + Premium Lamb Fleece Mattress + 1 Solid Wood Bedside Cabinet","Bed + Premium Lamb Fleece Mattress + 2 Solid Wood Bedside Cabinets","Bed + Tencel Mattress (3-Year Warranty)","Bed + Independent Spring Mattress (5-Year Warranty)","Bed + Premium Jute Mattress (10-Year Warranty)"],"shippingNote":"Furniture products are shipped exclusively via sea freight; shipping charges are not included in the estimated cost. Final pricing depends on package selection, finish, destination and order quantity."},{"id":"ds-006-winter-bear-cream-storage-bed","serial":"DS-006","name":"Winter Bear Cream Storage Bed","category":"Bedroom","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0707.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0707_1.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0707_3.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_1_1_0707_4.jpg","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_9_16_0707.png","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_9_16_0707_1.png","https://cdn.shopify.com/s/files/1/0982/8578/1278/files/pomelli_photoshoot_image_9_16_0707_2.png"],"colors":[],"sizes":["1500 x 2000 mm","1800 x 2000 mm"],"intro":"A premium modern upholstered storage bed featuring a durable composite fabric finish, solid pine wood slatted frame, hydraulic lift-up storage, and spacious under-bed storage. Designed for contemporary bedrooms with a clean minimalist aesthetic and everyday functionality.","specs":["Style: Modern Minimalist","Product Type: Hydraulic Storage Bed","Frame Material: Solid Pine Wood","Upholstery: Premium Composite Fabric","Structure: Box Frame","Storage: Hydraulic Lift-Up Under-Bed Storage","Support: Upgraded Pine Wood Slatted Base","Assembly: Knock-Down","Cross-border export ready"],"configurations":["Frame Structure","High-Pressure Air Chamber Structure","High-Sided Storage Box with Three Drawers"],"accessories":["1500 x 2000 mm / 1800 x 2000 mm — Overall Width 158 cm / 188 cm, Length 231 cm, Headboard Height 105 cm, Bed Height 28 cm","Bed Only","Bed + 2 Cabinets","Bed + Mattress","Bed + Mattress + 2 Cabinets","Bed + 2 Cabinets (Upgraded Slatted Frame)","Bed + 2 Cabinets (Dense Slatted Frame)"],"shippingNote":"Furniture products are shipped exclusively via sea freight; shipping charges are not included in the estimated cost. Final pricing depends on configuration, package selection, destination and order quantity."}];
+const WA = '918302192742';
+const grid=document.getElementById('grid'),catsEl=document.getElementById('cats'),searchEl=document.getElementById('search'),overlay=document.getElementById('overlay'),modalBody=document.getElementById('modalBody');
+let activeCat='All';
+function waLink(p){
+  var msg=encodeURIComponent("Hi Ameck House, I'd like a quotation for "+p.serial+" - "+p.name+".");
+  return 'https://wa.me/'+WA+'?text='+msg;
+}
+function renderCats(){
+  var cats=['All'].concat(Array.from(new Set(PRODUCTS.map(function(p){return p.category;}))));
+  catsEl.innerHTML=cats.map(function(c){return '<button class="cat-btn'+(c===activeCat?' active':'')+'" data-cat="'+c+'">'+c+'</button>';}).join('');
+  catsEl.querySelectorAll('.cat-btn').forEach(function(b){b.addEventListener('click',function(){activeCat=b.dataset.cat;renderCats();renderGrid();});});
+}
+function matches(p){
+  var q=searchEl.value.trim().toLowerCase();
+  var catOk=activeCat==='All'||p.category===activeCat;
+  var qOk=!q||p.name.toLowerCase().indexOf(q)>=0||p.serial.toLowerCase().indexOf(q)>=0||p.category.toLowerCase().indexOf(q)>=0;
+  return catOk&&qOk;
+}
+function renderGrid(){
+  var list=PRODUCTS.filter(matches);
+  if(!list.length){grid.innerHTML='<div class="empty">No pieces match your search.</div>';return;}
+  grid.innerHTML=list.map(function(p){
+    return '<div class="card" data-id="'+p.id+'">'
+      +'<div class="frame"><span class="num">'+p.serial+'</span><img src="'+p.images[0]+'" alt="'+p.name+'" loading="lazy"></div></div>';
+  }).join('');
+  grid.querySelectorAll('.card').forEach(function(c){c.addEventListener('click',function(){openModal(c.dataset.id);});});
+}
+function openModal(id){
+  var p=PRODUCTS.find(function(x){return x.id===id;}); if(!p) return;
+  var introHtml=p.intro? '<div class="desc-text">'+p.intro+'</div>' : '';
+  var specsHtml=(p.specs&&p.specs.length)? '<h4>Key Specifications</h4><ul class="spec-list">'+p.specs.map(function(s){return '<li>'+s+'</li>';}).join('')+'</ul>' : '';
+  var configHtml=(p.configurations&&p.configurations.length)? '<h4>Configurations</h4><div class="swatches">'+p.configurations.map(function(c){return '<span class="swatch">'+c+'</span>';}).join('')+'</div>' : '';
+  var colorsHtml=p.colors.length? '<h4>Finishes</h4><div class="swatches">'+p.colors.map(function(c){return '<span class="swatch">'+c+'</span>';}).join('')+'</div>' : '';
+  var sizesHtml=p.sizes.length? '<h4>Sizes</h4><div class="swatches">'+p.sizes.map(function(s){return '<span class="swatch">'+s+'</span>';}).join('')+'</div>' : '';
+  var accessoriesHtml=(p.accessories&&p.accessories.length)? '<h4>Optional Accessories</h4><ul class="spec-list">'+p.accessories.map(function(a){return '<li>'+a+'</li>';}).join('')+'</ul>' : '';
+  var shippingHtml=p.shippingNote? '<div class="shipping-box"><div class="shipping-title">Shipping &amp; Pricing</div><div class="shipping-text">'+p.shippingNote+'</div></div>' : '';
+  modalBody.innerHTML='<div class="modal-media"><img class="modal-main-img" id="mainImg" src="'+p.images[0]+'" alt="'+p.name+'"><div class="thumbs" id="thumbs"></div></div>'
+    +'<div class="modal-info"><div class="serial">'+p.serial+'</div><h2>'+p.name+'</h2>'
+    +introHtml+specsHtml+configHtml+colorsHtml+sizesHtml+accessoriesHtml+shippingHtml
+    +'<a class="wa-btn" href="'+waLink(p)+'" target="_blank" rel="noopener">Enquire on WhatsApp</a>'
+    +'<div class="enquire-note">Price on request. Tap the button above and our team will confirm quotation, lead time and shipping cost.</div></div>';
+  var thumbsEl=modalBody.querySelector('#thumbs'), mainImg=modalBody.querySelector('#mainImg');
+  thumbsEl.innerHTML=p.images.map(function(src,i){return '<img data-idx="'+i+'" src="'+src+'" class="'+(i===0?'active':'')+'">';}).join('');
+  thumbsEl.querySelectorAll('img').forEach(function(el){el.addEventListener('click',function(){
+    mainImg.src=el.src; thumbsEl.querySelectorAll('img').forEach(function(t){t.classList.remove('active');}); el.classList.add('active');
+  });});
+  overlay.classList.add('open');
+}
+function closeModal(){overlay.classList.remove('open');modalBody.innerHTML='';}
+document.getElementById('modalClose').addEventListener('click',closeModal);
+overlay.addEventListener('click',function(e){if(e.target===overlay)closeModal();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
+searchEl.addEventListener('input',renderGrid);
+renderCats(); renderGrid();
+</script>
+</body>
+</html>
