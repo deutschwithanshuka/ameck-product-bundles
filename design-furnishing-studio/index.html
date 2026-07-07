@@ -49,12 +49,12 @@ footer .foot-links a:hover{color:var(--accent);border-color:var(--accent);}
 .overlay.open .modal{transform:translateY(0) scale(1);}
 .modal-close{position:absolute;top:16px;right:18px;background:none;border:none;font-size:22px;color:var(--ink);cursor:pointer;z-index:2;line-height:1;}
 .modal-body{display:grid;grid-template-columns:1fr 1fr;gap:0;}
-.modal-media{background:#fff;padding:28px;}
+.modal-media{background:#fff;padding:28px;min-width:0;}
 .modal-main-img{width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center;background:#fafafa;}
 .thumbs{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;}
 .thumbs img{width:56px;height:56px;object-fit:cover;object-position:center;cursor:pointer;border:1px solid var(--line);opacity:.7;background:#fafafa;}
 .thumbs img.active{opacity:1;border-color:var(--accent);}
-.modal-info{padding:40px 36px;max-width:100%;overflow-wrap:break-word;word-break:break-word;}
+.modal-info{padding:40px 36px;max-width:100%;min-width:0;overflow-wrap:break-word;word-break:break-word;}
 .modal-info .serial{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);}
 .modal-info h2{font-family:'Playfair Display',serif;font-weight:500;font-size:26px;margin:8px 0 20px;overflow-wrap:break-word;}
 .modal-info h4{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin:22px 0 8px;}
