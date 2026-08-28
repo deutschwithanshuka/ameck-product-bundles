@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ameck House Kids Catalogue</title>
+<meta property="og:title" content="Ameck House Kids Catalogue">
+<meta property="og:description" content="Wholesale export catalogue: kids bedding, home bedding and gear & toys.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#EAE6DE;--panel:#F5F2EC;--ink:#2E2A24;--muted:#7A7167;--line:#D8D1C4;--accent:#8B6F47;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--ink);font-family:'Jost',-apple-system,BlinkMacSystemFont,sans-serif;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:1180px;margin:0 auto;padding:64px 32px 40px;}
+header{text-align:center;margin-bottom:44px;}
+.logo{font-family:'Playfair Display',serif;font-size:56px;line-height:1;letter-spacing:.5px;}
+.logo em{font-style:italic;font-weight:400;} .logo b{font-style:normal;font-weight:600;margin-left:10px;}
+.tagline{margin-top:14px;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);}
+.contact-row{margin-top:18px;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px;font-size:12.5px;color:var(--muted);}
+.contact-row a{color:var(--ink);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .15s,color .15s;}
+.contact-row a:hover{border-bottom-color:var(--accent);color:var(--accent);} .contact-row .dot{color:var(--line);}
+.controls{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px 22px;margin:0 auto 48px;padding-bottom:28px;border-bottom:1px solid var(--line);}
+.cats{display:flex;flex-wrap:wrap;gap:8px 18px;justify-content:center;}
+.cat-btn{background:none;border:none;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);cursor:pointer;padding:6px 2px;border-bottom:1px solid transparent;transition:color .15s,border-color .15s;}
+.cat-btn:hover{color:var(--ink);} .cat-btn.active{color:var(--ink);border-bottom-color:var(--accent);}
+#search{width:220px;background:transparent;border:none;border-bottom:1px solid var(--line);font-family:'Jost',sans-serif;font-size:13px;color:var(--ink);padding:6px 4px;outline:none;}
+#search::placeholder{color:var(--muted);} #search:focus{border-bottom-color:var(--accent);}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px 28px;perspective:1400px;}
+.card{cursor:pointer;transition:transform .35s cubic-bezier(.2,.8,.2,1);}
+.card:hover{transform:translateY(-8px);}
+.card .frame{position:relative;background:var(--panel);aspect-ratio:1/1;overflow:hidden;border:1px solid var(--line);box-shadow:0 1px 2px rgba(46,42,36,.06),0 10px 24px rgba(46,42,36,.08);transition:box-shadow .35s ease;}
+.card:hover .frame{box-shadow:0 4px 10px rgba(46,42,36,.12),0 24px 46px rgba(46,42,36,.20);}
+.card img{width:100%;height:100%;object-fit:contain;object-position:center;display:block;transition:transform .6s ease;}
+.card:hover img{transform:scale(1.06);}
+.card .num{position:absolute;top:10px;left:12px;font-family:'Playfair Display',serif;font-style:italic;font-size:14px;color:var(--ink);background:rgba(245,242,236,.9);padding:1px 9px;border-radius:2px;box-shadow:0 2px 6px rgba(46,42,36,.12);}
+.empty{grid-column:1/-1;text-align:center;padding:60px 0;color:var(--muted);font-family:'Playfair Display',serif;font-style:italic;}
+footer{text-align:center;margin-top:80px;padding-top:28px;border-top:1px solid var(--line);}
+footer .site{font-family:'Playfair Display',serif;font-style:italic;font-size:15px;color:var(--ink);}
+footer .sub{margin-top:8px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);}
+footer .foot-links{margin-top:18px;display:flex;justify-content:center;gap:22px;flex-wrap:wrap;}
+footer .foot-links a{font-size:12px;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px;transition:border-color .15s,color .15s;}
+footer .foot-links a:hover{color:var(--accent);border-color:var(--accent);}
+.overlay{display:none;position:fixed;inset:0;background:rgba(46,42,36,.55);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);z-index:1000;align-items:center;justify-content:center;padding:28px;opacity:0;transition:opacity .25s ease;}
+.overlay.open{display:flex;opacity:1;}
+.modal{background:var(--panel);max-width:960px;width:100%;max-height:88vh;overflow-y:auto;border:1px solid var(--line);border-radius:2px;position:relative;box-shadow:0 20px 40px rgba(46,42,36,.18),0 40px 90px rgba(46,42,36,.30);transform:translateY(14px) scale(.98);transition:transform .3s cubic-bezier(.2,.8,.2,1);}
+.overlay.open .modal{transform:translateY(0) scale(1);}
+.modal-close{position:absolute;top:16px;right:18px;background:none;border:none;font-size:22px;color:var(--ink);cursor:pointer;z-index:2;line-height:1;}
+.modal-body{display:grid;grid-template-columns:1fr 1fr;gap:0;}
+.modal-media{background:#fff;padding:28px;}
+.modal-main-img{width:100%;max-width:100%;height:auto;max-height:70vh;aspect-ratio:1/1;object-fit:contain;object-position:center;background:#fafafa;display:block;}
+.thumbs{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;}
+.thumbs img{width:56px;height:56px;object-fit:contain;object-position:center;cursor:pointer;border:1px solid var(--line);opacity:.7;background:#fafafa;}
+.thumbs img.active{opacity:1;border-color:var(--accent);}
+.modal-info{padding:40px 36px;}
+.modal-info .serial{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);}
+.modal-info h2{font-family:'Playfair Display',serif;font-weight:500;font-size:26px;margin:8px 0 20px;}
+.modal-info h4{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin:22px 0 8px;}
+.modal-info h4:first-of-type{margin-top:0;}
+.desc-text{font-size:13px;line-height:1.7;color:var(--ink);}
+.swatches{display:flex;flex-wrap:wrap;gap:8px;}
+.swatch{font-size:12px;padding:5px 12px;border:1px solid var(--line);color:var(--ink);}
+.wa-btn{display:inline-block;margin-top:28px;padding:12px 26px;background:var(--ink);color:#fff;text-decoration:none;font-size:13px;letter-spacing:1px;text-transform:uppercase;transition:background .2s;}
+.wa-btn:hover{background:var(--accent);}
+.enquire-note{margin-top:10px;font-size:11.5px;color:var(--muted);line-height:1.6;}
+@media (max-width:860px){.grid{grid-template-columns:repeat(2,1fr);} .logo{font-size:42px;}}
+@media (max-width:720px){.modal-body{grid-template-columns:1fr;} .overlay{padding:0;align-items:flex-end;} .modal{max-height:94vh;border-radius:14px 14px 0 0;} .modal-media,.modal-info{padding:22px;} .thumbs{flex-wrap:nowrap;overflow-x:auto;} .thumbs img{flex:0 0 auto;}}
+@media (max-width:520px){.grid{grid-template-columns:1fr 1fr;gap:22px 14px;} .wrap{padding:40px 16px 26px;} .logo{font-size:34px;} .cat-btn{font-size:12px;padding:8px 2px;} #search{width:150px;font-size:16px;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="logo"><em>Ameck</em><b>House</b></div>
+<div class="tagline">Wholesale Kids Catalogue</div>
+<div class="contact-row">
+<a href="https://ameckhouse.com/" target="_blank" rel="noopener">ameckhouse.com</a>
+<span class="dot">·</span>
+<a href="mailto:info@ameckhouse.com">info@ameckhouse.com</a>
+<span class="dot">·</span>
+<a href="https://wa.me/918302192742" target="_blank" rel="noopener">WhatsApp Us</a>
+</div>
+</header>
+<div class="controls">
+<div class="cats" id="cats"></div>
+<div class="search-wrap"><input id="search" type="text" placeholder="Search styles…"></div>
+</div>
+<p style="max-width:640px;margin:-24px auto 40px;text-align:center;font-size:12px;line-height:1.6;color:var(--muted);">Prices on request. Tap any style to enquire directly on WhatsApp with the product link included.</p>
+<div class="grid" id="grid"></div>
+<footer>
+<div class="site">catalogue.ameckhouse.com</div>
+<div class="sub">Kids Collection · Export Enquiries Welcome</div>
+<div class="foot-links">
+<a href="https://ameckhouse.com/" target="_blank" rel="noopener">Visit Website</a>
+<a href="mailto:info@ameckhouse.com">Email Us</a>
+<a href="https://wa.me/918302192742" target="_blank" rel="noopener">WhatsApp Us</a>
+</div>
+</footer>
+</div>
+<div class="overlay" id="overlay">
+<div class="modal">
+<button class="modal-close" id="modalClose">&times;</button>
+<div class="modal-body" id="modalBody"></div>
+</div>
+</div>
+<script>
+const PRODUCTS = [
+{"id":"bionic-anti-startle-baby-crib-toys-mosquito-net-movable-in-bed-a187","serial":"KD-001","name":"Bionic Anti-Startle Baby Crib with Toys & Mosquito Net","category":"Kids Bedding","handle":"bionic-anti-startle-baby-crib-toys-mosquito-net-movable-in-bed-a187","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_u5KAE7PQLD.jpg"],"colors":[],"sizes":[],"description":"Bionic anti-startle baby crib with hanging toys and mosquito net, movable bed-in-bed design for newborns."},
+{"id":"beanlala-pure-cotton-adjustable-baby-crib-portable-anti-pressure-a184","serial":"KD-002","name":"Pure Cotton Adjustable Baby Crib","category":"Kids Bedding","handle":"beanlala-pure-cotton-adjustable-baby-crib-portable-anti-pressure-a184","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_p8IUwZ2ehw.jpg"],"colors":[],"sizes":[],"description":"Pure cotton adjustable baby crib, portable anti-pressure design for newborns."},
+{"id":"beanlala-portable-baby-crib-carrying-bag-movable-bed-in-bed-a183","serial":"KD-003","name":"Portable Baby Crib with Carrying Bag","category":"Kids Bedding","handle":"beanlala-portable-baby-crib-carrying-bag-movable-bed-in-bed-a183","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_SyPeJI0Ub8.jpg"],"colors":[],"sizes":[],"description":"Portable baby crib with carrying bag, movable bed-in-bed design for travel and home use."},
+{"id":"dearest-baby-electric-rocking-cradle-bluetooth-folding-a181","serial":"KD-004","name":"DEAREST BABY Electric Rocking Cradle","category":"Kids Bedding","handle":"dearest-baby-electric-rocking-cradle-bluetooth-folding-a181","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_Lw7TvrGswO.jpg"],"colors":[],"sizes":[],"description":"Electric rocking cradle with Bluetooth speaker and folding frame for easy storage."},
+{"id":"foldable-baby-mosquito-net-portable-encrypted-crib-net-a179","serial":"KD-005","name":"Foldable Baby Mosquito Net","category":"Kids Bedding","handle":"foldable-baby-mosquito-net-portable-encrypted-crib-net-a179","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_vQFP5zma47.jpg"],"colors":[],"sizes":[],"description":"Foldable, portable encrypted mosquito net for cribs and children's beds."},
+{"id":"portable-folding-childrens-mosquito-net-crib-anti-mosquito-a178","serial":"KD-006","name":"Portable Folding Children's Mosquito Net Bed","category":"Kids Bedding","handle":"portable-folding-childrens-mosquito-net-crib-anti-mosquito-a178","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_0edKiwwTfW.jpg"],"colors":[],"sizes":[],"description":"Portable folding mosquito net crib for children, anti-mosquito protection."},
+{"id":"portable-folding-baby-bed-in-bed-mosquito-net-a177","serial":"KD-007","name":"Portable Folding Baby Bed","category":"Kids Bedding","handle":"portable-folding-baby-bed-in-bed-mosquito-net-a177","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_1lgn3Atr4r.jpg"],"colors":[],"sizes":[],"description":"Portable folding baby bed-in-bed with mosquito net, ideal for travel and co-sleeping."},
+{"id":"solid-wood-multifunctional-baby-crib-converts-childrens-bed-a176","serial":"KD-008","name":"Solid Wood Children's Bed","category":"Kids Bedding","handle":"solid-wood-multifunctional-baby-crib-converts-childrens-bed-a176","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_1lgnj5Mr4r.jpg"],"colors":[],"sizes":[],"description":"Multifunctional solid wood crib that converts into a children's bed as they grow."},
+{"id":"giraffe-girls-bed-solid-wood-princess-fabric-slide-a175","serial":"KD-009","name":"Giraffe Girl's Bed Princess Fabric","category":"Kids Bedding","handle":"giraffe-girls-bed-solid-wood-princess-fabric-slide-a175","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_cpeQITg0eP.jpg"],"colors":[],"sizes":[],"description":"Giraffe-themed girl's bed in solid wood with princess fabric accents and slide."},
+{"id":"cartoon-pink-rabbit-girls-bed-guardrail-solid-wood-a174","serial":"KD-010","name":"Cartoon Pink Rabbit Girl's Bed with Guardrail","category":"Kids Bedding","handle":"cartoon-pink-rabbit-girls-bed-guardrail-solid-wood-a174","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_u5KyxzSQLD.jpg"],"colors":[],"sizes":[],"description":"Cartoon pink rabbit girl's bed in solid wood with safety guardrail."},
+{"id":"pink-princess-rabbit-bed-light-luxury-fabric-girls-bed-a173","serial":"KD-011","name":"Pink Princess Rabbit Bed","category":"Kids Bedding","handle":"pink-princess-rabbit-bed-light-luxury-fabric-girls-bed-a173","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_mEuguJnhJQ.jpg"],"colors":[],"sizes":[],"description":"Pink princess rabbit-themed girl's bed in light luxury fabric."},
+{"id":"melody-girls-bed-cute-cartoon-soft-leather-solid-wood-a172","serial":"KD-012","name":"Melody Girl's Bed","category":"Kids Bedding","handle":"melody-girls-bed-cute-cartoon-soft-leather-solid-wood-a172","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/O1CN01Rh3uPY2G0X07OUaj4__2216999128953-0-cib.jpg"],"colors":[],"sizes":[],"description":"Cute cartoon girl's bed in soft leather over solid wood frame."},
+{"id":"rocket-launch-boys-bed-soft-leather-solid-wood-slide-a171","serial":"KD-013","name":"Rocket Launch Boy's Bed","category":"Kids Bedding","handle":"rocket-launch-boys-bed-soft-leather-solid-wood-slide-a171","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/O1CN01zZkAg42G0X1PnxSOB__2216999128953-0-cib.jpg"],"colors":[],"sizes":[],"description":"Rocket launch themed boy's bed in soft leather over solid wood, with slide."},
+{"id":"beanlala-portable-baby-crib-foldable-e-bed-mosquito-net-a168","serial":"KD-014","name":"Portable Baby Crib | Foldable E-Bed","category":"Kids Bedding","handle":"beanlala-portable-baby-crib-foldable-e-bed-mosquito-net-a168","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_N2Aea5j6D9.jpg"],"colors":[],"sizes":[],"description":"Foldable portable baby crib with mosquito net, compact E-bed design."},
+{"id":"cream-style-cloud-bed-guardrail-girls-solid-wood-a153","serial":"KD-015","name":"Cream Style Cloud Bed with Guardrail","category":"Kids Bedding","handle":"cream-style-cloud-bed-guardrail-girls-solid-wood-a153","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_lJOilMlgv9.jpg"],"colors":[],"sizes":[],"description":"Cream-style cloud-shaped girl's bed in solid wood with guardrail."},
+{"id":"hellokitty-fantasy-princess-island-bed-girls-wood-a152","serial":"KD-016","name":"Hellokitty Fantasy Princess Island Bed","category":"Kids Bedding","handle":"hellokitty-fantasy-princess-island-bed-girls-wood-a152","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/O1CN01epavZA1i7gK4cXvcD__2219327804366-0-cib.jpg"],"colors":[],"sizes":[],"description":"Hello Kitty fantasy princess island bed in solid wood for girls."},
+{"id":"rabbit-ears-princess-girls-bed-cream-style-wood-a151","serial":"KD-017","name":"Rabbit Ears Princess Girl's Bed","category":"Kids Bedding","handle":"rabbit-ears-princess-girls-bed-cream-style-wood-a151","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_0edmAFDTfW.jpg"],"colors":[],"sizes":[],"description":"Rabbit ears princess-themed girl's bed in cream-style solid wood."},
+{"id":"korean-style-kids-toddler-bed-cartoon-guardrail-a142","serial":"KD-018","name":"Toddler Single Bed","category":"Kids Bedding","handle":"korean-style-kids-toddler-bed-cartoon-guardrail-a142","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_O66B334ynm.jpg"],"colors":[],"sizes":[],"description":"Korean-style toddler single bed with cartoon guardrail."},
+{"id":"checker-bbc-portable-baby-nest-bed-mosquito-net-a141","serial":"KD-019","name":"Portable Baby Nest Bed","category":"Kids Bedding","handle":"checker-bbc-portable-baby-nest-bed-mosquito-net-a141","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_UPPDS9Hwny.jpg"],"colors":[],"sizes":[],"description":"Portable baby nest bed with mosquito net for newborns."},
+{"id":"checker-cm9-wooden-baby-crib-foldable-mosquito-net-a140","serial":"KD-020","name":"Wooden Baby Crib","category":"Kids Bedding","handle":"checker-cm9-wooden-baby-crib-foldable-mosquito-net-a140","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_rglquocxtc.jpg"],"colors":[],"sizes":[],"description":"Foldable wooden baby crib with mosquito net."},
+{"id":"checker-foldable-baby-crib-mosquito-net-diaper-table-a139","serial":"KD-021","name":"Checker Foldable Baby Crib","category":"Kids Bedding","handle":"checker-foldable-baby-crib-mosquito-net-diaper-table-a139","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_lJ71yjZgv9.jpg"],"colors":[],"sizes":[],"description":"Foldable baby crib with mosquito net and built-in diaper table."},
+{"id":"habic-newborn-large-baby-crib-mosquito-net-foldable-a138","serial":"KD-022","name":"Baby Crib with Mosquito Net","category":"Kids Bedding","handle":"habic-newborn-large-baby-crib-mosquito-net-foldable-a138","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_LwUfKqoswO.jpg"],"colors":[],"sizes":[],"description":"Large newborn baby crib with mosquito net, foldable for storage."},
+{"id":"mastela-6-in-1-detachable-baby-rocking-chair-adjustable-a137","serial":"KD-023","name":"Detachable Baby Rocking Chair","category":"Kids Bedding","handle":"mastela-6-in-1-detachable-baby-rocking-chair-adjustable-a137","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_iGAjwg13uK.jpg"],"colors":[],"sizes":[],"description":"Mastela 6-in-1 detachable, adjustable baby rocking chair."},
+{"id":"mastela-3-in-1-bluetooth-electric-baby-rocking-chair-a136","serial":"KD-024","name":"Mastela 3-in-1 Bluetooth Electric Baby Rocking Chair","category":"Kids Bedding","handle":"mastela-3-in-1-bluetooth-electric-baby-rocking-chair-a136","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_bxrpkXh5Y2.jpg"],"colors":[],"sizes":[],"description":"Mastela 3-in-1 electric baby rocking chair with Bluetooth speaker."},
+{"id":"electric-baby-rocker-chair-bluetooth-remote-a135","serial":"KD-025","name":"Electric Baby Rocker Chair | Bluetooth Remote Newborn Swing","category":"Kids Bedding","handle":"electric-baby-rocker-chair-bluetooth-remote-a135","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_tCfZgv4mZJ.jpg"],"colors":[],"sizes":[],"description":"Electric baby rocker chair with Bluetooth remote control, newborn swing."},
+{"id":"baby-co-sleeper-crib-pure-cotton-portable","serial":"KD-026","name":"Baby Sleeper Crib | Pure Cotton Portable Newborn Nest Bed","category":"Kids Bedding","handle":"baby-co-sleeper-crib-pure-cotton-portable","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-image-as_JN9CmEfOq4.jpg"],"colors":[],"sizes":[],"description":"Pure cotton portable co-sleeper crib, newborn nest bed."},
+{"id":"xinjiang-cotton-quilt-class-a-baby-grade-spring-autumn-a190","serial":"KD-027","name":"Spring Autumn Air Conditioning Quilt","category":"Home Bedding","handle":"xinjiang-cotton-quilt-class-a-baby-grade-spring-autumn-a190","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_s7JXRDzl8e.jpg"],"colors":[],"sizes":[],"description":"Xinjiang cotton, Class A baby-grade quilt for spring and autumn."},
+{"id":"artisan-floral-quilted-bedspread-set-hummingbird-garden-a167","serial":"KD-028","name":"Artisan Bedspread Set Garden Print","category":"Home Bedding","handle":"artisan-floral-quilted-bedspread-set-hummingbird-garden-a167","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_u5K7y4IQLD.jpg"],"colors":[],"sizes":[],"description":"Artisan quilted bedspread set with hummingbird garden floral print."},
+{"id":"sunflower-hummingbird-quilted-bedspread-interior-floral-a166","serial":"KD-029","name":"Sunflower Quilted Bedspread","category":"Home Bedding","handle":"sunflower-hummingbird-quilted-bedspread-interior-floral-a166","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_s7JA3HTl8e_1.jpg"],"colors":[],"sizes":[],"description":"Sunflower and hummingbird quilted bedspread, floral interior print."},
+{"id":"hummingbird-wildflower-quilted-bedspread-set-nature-retreat-a165","serial":"KD-030","name":"Wildflower Quilted Bedspread","category":"Home Bedding","handle":"hummingbird-wildflower-quilted-bedspread-set-nature-retreat-a165","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_VXBQXTSMMU.jpg"],"colors":[],"sizes":[],"description":"Hummingbird wildflower quilted bedspread set, nature retreat theme."},
+{"id":"botanical-garden-quilted-bedspread-set-hummingbird-floral-a164","serial":"KD-031","name":"Botanical Garden Bedspread Print","category":"Home Bedding","handle":"botanical-garden-quilted-bedspread-set-hummingbird-floral-a164","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_0edCokWTfW.jpg"],"colors":[],"sizes":[],"description":"Botanical garden quilted bedspread set with hummingbird floral print."},
+{"id":"sunflower-hummingbird-digital-print-quilted-bedspread-a163","serial":"KD-032","name":"Sunflower Digital Print Bedspread","category":"Home Bedding","handle":"sunflower-hummingbird-digital-print-quilted-bedspread-a163","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_lJO2kBZgv9.jpg"],"colors":[],"sizes":[],"description":"Sunflower and hummingbird digital print quilted bedspread."},
+{"id":"luxury-owl-botanical-quilted-comforter-set-skin-friendly-a162","serial":"KD-033","name":"Luxury Botanical Quilted Comforter","category":"Home Bedding","handle":"luxury-owl-botanical-quilted-comforter-set-skin-friendly-a162","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_Eb5SUctuuO.jpg"],"colors":[],"sizes":[],"description":"Luxury owl and botanical quilted comforter set, skin-friendly fabric."},
+{"id":"owl-print-quilted-bedding-set-premium-digital-comforter-a161","serial":"KD-034","name":"Quilted Bedding Set Premium Digital","category":"Home Bedding","handle":"owl-print-quilted-bedding-set-premium-digital-comforter-a161","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_O6icYEnynm.jpg"],"colors":[],"sizes":[],"description":"Owl print quilted bedding set, premium digital print comforter."},
+{"id":"quilted-owl-floral-comforter-set-all-season-bedding-a160","serial":"KD-035","name":"Comforter Set Bedding","category":"Home Bedding","handle":"quilted-owl-floral-comforter-set-all-season-bedding-a160","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_aFHsFxNfSh.jpg"],"colors":[],"sizes":[],"description":"Quilted owl floral comforter set, all-season bedding."},
+{"id":"boho-owl-quilted-comforter-set-floral-digital-print-a159","serial":"KD-036","name":"Quilted Comforter Set | Floral Digital Print Bedspread","category":"Home Bedding","handle":"boho-owl-quilted-comforter-set-floral-digital-print-a159","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_Lw73rS3swO.jpg"],"colors":[],"sizes":[],"description":"Boho owl quilted comforter set, floral digital print bedspread."},
+{"id":"owl-pattern-digital-print-quilted-bedspread-set-a158","serial":"KD-037","name":"Owl Pattern Digital Print Quilted Bedspread Set","category":"Home Bedding","handle":"owl-pattern-digital-print-quilted-bedspread-set-a158","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_79NnomzJAL.jpg"],"colors":[],"sizes":[],"description":"Owl pattern digital print quilted bedspread set."},
+{"id":"thickened-flannel-coral-velvet-blanket-warm-gift-a157","serial":"KD-038","name":"Thickened Flannel Coral Velvet Blanket","category":"Home Bedding","handle":"thickened-flannel-coral-velvet-blanket-warm-gift-a157","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_XmhqKMSBfo.jpg"],"colors":[],"sizes":[],"description":"Thickened flannel coral velvet blanket, a warm gift option."},
+{"id":"80-count-pure-cotton-lace-4-piece-bedding-set-ins-a156","serial":"KD-039","name":"Pure Cotton Lace Shell-Edged","category":"Home Bedding","handle":"80-count-pure-cotton-lace-4-piece-bedding-set-ins-a156","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_u5KSroNQLD.jpg"],"colors":[],"sizes":[],"description":"80-count pure cotton lace shell-edged 4-piece bedding set."},
+{"id":"class-a-pure-cotton-kids-cartoon-fitted-sheet-2025-a155","serial":"KD-040","name":"Pure Cotton Kids Cartoon Fitted Sheet","category":"Home Bedding","handle":"class-a-pure-cotton-kids-cartoon-fitted-sheet-2025-a155","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_Lw73gJLswO.jpg"],"colors":[],"sizes":[],"description":"Class A pure cotton kids cartoon-print fitted sheet."},
+{"id":"pure-cotton-class-a-kids-quilt-cover-cartoon-dinosaur-a154","serial":"KD-041","name":"Pure Cotton Class A Kids Quilt Cover","category":"Home Bedding","handle":"pure-cotton-class-a-kids-quilt-cover-cartoon-dinosaur-a154","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_gOyZ1whSXO.jpg"],"colors":[],"sizes":[],"description":"Pure cotton Class A kids quilt cover, cartoon dinosaur print."},
+{"id":"60-long-staple-cotton-kids-kindergarten-bedding-set-a150","serial":"KD-042","name":"Cotton Kids Bedding Set Cartoon Print","category":"Home Bedding","handle":"60-long-staple-cotton-kids-kindergarten-bedding-set-a150","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_eItEABhdqL.jpg"],"colors":[],"sizes":[],"description":"60s long-staple cotton kids kindergarten bedding set, cartoon print."},
+{"id":"pure-cotton-kids-kindergarten-bedding-set-cartoon-a149","serial":"KD-043","name":"Pure Cotton Kids Bedding Set","category":"Home Bedding","handle":"pure-cotton-kids-kindergarten-bedding-set-cartoon-a149","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_iGzVrLM3uK.jpg"],"colors":[],"sizes":[],"description":"Pure cotton kids kindergarten bedding set, cartoon print."},
+{"id":"brushed-fitted-sheet-bedding-set-tie-dye-print-a148","serial":"KD-044","name":"Brushed Bedding Set","category":"Home Bedding","handle":"brushed-fitted-sheet-bedding-set-tie-dye-print-a148","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_s7J6mjpl8e.jpg"],"colors":[],"sizes":[],"description":"Brushed fitted sheet bedding set, tie-dye print."},
+{"id":"digital-print-brushed-duvet-cover-3-piece-cartoon-a147","serial":"KD-045","name":"Digital Print Cartoon Duvet Cover Set (3-Piece)","category":"Home Bedding","handle":"digital-print-brushed-duvet-cover-3-piece-cartoon-a147","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_kslOMkZ16B.jpg"],"colors":[],"sizes":[],"description":"Digital print brushed duvet cover, 3-piece cartoon set."},
+{"id":"xiqiu-cooling-ice-silk-summer-quilt-antibacterial-a147","serial":"KD-046","name":"Silk Summer Quilt","category":"Home Bedding","handle":"xiqiu-cooling-ice-silk-summer-quilt-antibacterial-a147","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_KLs7cBOkqp.jpg"],"colors":[],"sizes":[],"description":"Cooling ice silk summer quilt, antibacterial nylon fabric."},
+{"id":"xiqiu-class-a-pure-cotton-kindergarten-bedding-set-a146","serial":"KD-047","name":"Cotton Bedding Cartoon","category":"Home Bedding","handle":"xiqiu-class-a-pure-cotton-kindergarten-bedding-set-a146","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_lJO6cPMgv9.jpg"],"colors":[],"sizes":[],"description":"Class A pure cotton kindergarten bedding set, cartoon print."},
+{"id":"3d-printed-kids-summer-quilt-lyocell-cartoon-a144","serial":"KD-048","name":"Kids Summer Quilt Blanket","category":"Home Bedding","handle":"3d-printed-kids-summer-quilt-lyocell-cartoon-a144","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/O1CN01RiYeHM1hMxdEUMXs8__2213159694264-0-cib.jpg"],"colors":[],"sizes":[],"description":"3D printed kids summer quilt in lyocell fabric, cartoon designs."},
+{"id":"soybean-fiber-double-gauze-summer-quilt-class-a-a143","serial":"KD-049","name":"Double Gauze Summer Quilt Cotton","category":"Home Bedding","handle":"soybean-fiber-double-gauze-summer-quilt-class-a-a143","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_s77T0CEl8e.jpg"],"colors":[],"sizes":[],"description":"Soybean fiber double gauze summer quilt, Class A cotton."},
+{"id":"habe-rc-double-bumper-car-battle-parent-child-drift-kart-a194","serial":"KD-050","name":"RC Double Bumper Car Collision Toy","category":"Gear & Toys","handle":"habe-rc-double-bumper-car-battle-parent-child-drift-kart-a194","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_create-one-single-photo-o_YMdOezGWeC.jpg"],"colors":[],"sizes":[],"description":"RC double bumper car for parent-child battle and drift kart play."},
+{"id":"habe-mini-remote-control-boat-1-32-electric-tugboat-pocket-rc-toy-a193","serial":"KD-051","name":"Habe Mini Remote Control Boat Toy","category":"Gear & Toys","handle":"habe-mini-remote-control-boat-1-32-electric-tugboat-pocket-rc-toy-a193","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_generate-one-single-photo_rg73LARxtc.jpg"],"colors":[],"sizes":[],"description":"1:32 scale mini remote control electric tugboat, pocket-sized RC toy."},
+{"id":"buds-baby-soothing-doll-newborn-palm-patting-sleep-aid-a192","serial":"KD-052","name":"Buds Baby Soothing Doll","category":"Gear & Toys","handle":"buds-baby-soothing-doll-newborn-palm-patting-sleep-aid-a192","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_create-a-premium-photorea_LwyOclXswO.jpg"],"colors":[],"sizes":[],"description":"Soothing doll with palm-patting sleep aid for newborns."},
+{"id":"yx-childrens-electric-motorcycle-rechargeable-tricycle-ride-on-a191","serial":"KD-053","name":"Children's Electric Motorcycle","category":"Gear & Toys","handle":"yx-childrens-electric-motorcycle-rechargeable-tricycle-ride-on-a191","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_fHqZNBLCDY.jpg"],"colors":[],"sizes":[],"description":"Rechargeable children's electric motorcycle tricycle, ride-on toy."},
+{"id":"baby-fitness-mat-stand-newborn-crawling-play-mat-early-education-a189","serial":"KD-054","name":"Baby Fitness Mat Stand","category":"Kids Bedding","handle":"baby-fitness-mat-stand-newborn-crawling-play-mat-early-education-a189","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_gOyo9VuSXO.jpg"],"colors":[],"sizes":[],"description":"Baby fitness mat with activity stand, crawling and early-education play mat."},
+{"id":"creative-leaf-shaped-baby-crawling-mat-fitness-frame-play-mat-a188","serial":"KD-055","name":"Creative Leaf Shaped Baby Crawling Mat","category":"Kids Bedding","handle":"creative-leaf-shaped-baby-crawling-mat-fitness-frame-play-mat-a188","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_gOyoJ68SXO.jpg"],"colors":[],"sizes":[],"description":"Leaf-shaped baby crawling mat with fitness frame play mat."},
+{"id":"baby-anti-collision-play-mat-extra-large-127cm-soft-crawling-mat-a186","serial":"KD-056","name":"Baby Anti-Collision Play Mat","category":"Kids Bedding","handle":"baby-anti-collision-play-mat-extra-large-127cm-soft-crawling-mat-a186","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_TdXsn2vVNR.jpg"],"colors":[],"sizes":[],"description":"Extra large 127cm soft anti-collision crawling play mat."},
+{"id":"baby-fitness-stand-play-mat-extra-large-foldable-crawling-mat-a185","serial":"KD-057","name":"Extra Large Foldable Crawling Mat 0–3 Years","category":"Kids Bedding","handle":"baby-fitness-stand-play-mat-extra-large-foldable-crawling-mat-a185","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_yi3v1cGPW9.jpg"],"colors":[],"sizes":[],"description":"Extra large foldable crawling mat suitable for ages 0-3 years."},
+{"id":"baby-anti-spit-up-incline-slope-pillow-stretch-knit-3d-mesh-a182","serial":"KD-058","name":"Baby Anti-Spit Up Incline Slope Pillow","category":"Kids Bedding","handle":"baby-anti-spit-up-incline-slope-pillow-stretch-knit-3d-mesh-a182","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_3znfyrIREY.jpg"],"colors":[],"sizes":[],"description":"Anti-spit-up incline slope pillow, stretch knit 3D mesh fabric."},
+{"id":"baby-incline-slope-pillow-set-anti-spitting-up-u-shaped-a180","serial":"KD-059","name":"Baby Incline Slope Pillow Set","category":"Kids Bedding","handle":"baby-incline-slope-pillow-set-anti-spitting-up-u-shaped-a180","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_dtmlHL5XSL.jpg"],"colors":[],"sizes":[],"description":"U-shaped incline slope pillow set, anti-spitting-up design."},
+{"id":"baby-fitness-rack-toy-music-pedal-piano-crawling-mat-a170","serial":"KD-060","name":"Baby Rack Toy Music Pedal Piano","category":"Gear & Toys","handle":"baby-fitness-rack-toy-music-pedal-piano-crawling-mat-a170","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_VXBQP00MMU.jpg"],"colors":[],"sizes":[],"description":"Baby fitness rack toy with music pedal piano, attaches to crawling mat."},
+{"id":"koyooo-baby-seat-cushion-cpc-certified-crawling-mat-a169","serial":"KD-061","name":"Baby Seat Cushion","category":"Kids Bedding","handle":"koyooo-baby-seat-cushion-cpc-certified-crawling-mat-a169","images":["https://cdn.shopify.com/s/files/1/0982/8578/1278/files/magnific_use-the-uploaded-product-_UP4Yf71wny.jpg"],"colors":[],"sizes":[],"description":"CPC-certified baby seat cushion, pairs with crawling mat."}
+];
+const WA = '918302192742';
+const grid=document.getElementById('grid'),catsEl=document.getElementById('cats'),searchEl=document.getElementById('search'),overlay=document.getElementById('overlay'),modalBody=document.getElementById('modalBody');
+let activeCat='All';
+function waLink(p){
+var productUrl='https://ameckhouse.com/products/'+p.handle;
+var msg=encodeURIComponent("Hi Ameck House, I'd like the wholesale price for "+p.serial+" - "+p.name+". "+productUrl);
+return 'https://wa.me/'+WA+'?text='+msg;
+}
+function renderCats(){
+var cats=['All'].concat(Array.from(new Set(PRODUCTS.map(function(p){return p.category;}))));
+catsEl.innerHTML=cats.map(function(c){return '<button class="cat-btn'+(c===activeCat?' active':'')+'" data-cat="'+c+'">'+c+'</button>';}).join('');
+catsEl.querySelectorAll('.cat-btn').forEach(function(b){b.addEventListener('click',function(){activeCat=b.dataset.cat;renderCats();renderGrid();});});
+}
+function matches(p){
+var q=searchEl.value.trim().toLowerCase();
+var catOk=activeCat==='All'||p.category===activeCat;
+var qOk=!q||p.name.toLowerCase().indexOf(q)>=0||p.serial.toLowerCase().indexOf(q)>=0||p.category.toLowerCase().indexOf(q)>=0;
+return catOk&&qOk;
+}
+function renderGrid(){
+var list=PRODUCTS.filter(matches);
+if(!list.length){grid.innerHTML='<div class="empty">No styles match your search.</div>';return;}
+grid.innerHTML=list.map(function(p){
+return '<div class="card" data-id="'+p.id+'">'
++'<div class="frame"><span class="num">'+p.serial+'</span><img src="'+p.images[0]+'" alt="'+p.name+'" loading="lazy"></div></div>';
+}).join('');
+grid.querySelectorAll('.card').forEach(function(c){c.addEventListener('click',function(){openModal(c.dataset.id);});});
+}
+function openModal(id){
+var p=PRODUCTS.find(function(x){return x.id===id;}); if(!p) return;
+var descHtml=p.description? '<div class="desc-text">'+p.description+'</div>' : '';
+var colorsHtml=p.colors.length? '<h4>Colours</h4><div class="swatches">'+p.colors.map(function(c){return '<span class="swatch">'+c+'</span>';}).join('')+'</div>' : '';
+var sizesHtml=p.sizes.length? '<h4>Sizes</h4><div class="swatches">'+p.sizes.map(function(s){return '<span class="swatch">'+s+'</span>';}).join('')+'</div>' : '';
+modalBody.innerHTML='<div class="modal-media"><img class="modal-main-img" id="mainImg" src="'+p.images[0]+'" alt="'+p.name+'"><div class="thumbs" id="thumbs"></div></div>'
++'<div class="modal-info"><div class="serial">'+p.serial+'</div><h2>'+p.name+'</h2>'
++descHtml+colorsHtml+sizesHtml
++'<a class="wa-btn" href="'+waLink(p)+'" target="_blank" rel="noopener">Enquire on WhatsApp</a>'
++'<div class="enquire-note">Price on request. Tapping the button opens WhatsApp with this style\'s link pre-filled so our team can quote you directly.</div></div>';
+var thumbsEl=modalBody.querySelector('#thumbs'), mainImg=modalBody.querySelector('#mainImg');
+thumbsEl.innerHTML=p.images.map(function(src,i){return '<img data-idx="'+i+'" src="'+src+'" class="'+(i===0?'active':'')+'">';}).join('');
+thumbsEl.querySelectorAll('img').forEach(function(el){el.addEventListener('click',function(){
+mainImg.src=el.src; thumbsEl.querySelectorAll('img').forEach(function(t){t.classList.remove('active');}); el.classList.add('active');
+});});
+overlay.classList.add('open');
+}
+function closeModal(){overlay.classList.remove('open');modalBody.innerHTML='';}
+document.getElementById('modalClose').addEventListener('click',closeModal);
+overlay.addEventListener('click',function(e){if(e.target===overlay)closeModal();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
+searchEl.addEventListener('input',renderGrid);
+renderCats(); renderGrid();
+</script>
+</body>
+</html>
