@@ -140,7 +140,7 @@ function renderGrid(){
   grid.querySelectorAll('.card').forEach(function(c){c.addEventListener('click',function(){openModal(c.dataset.id);});});
 }
 function openModal(id){
-  var p=PRODUCTS.find(function(x){return x.id===id;}); if(!p) return;document.body.style.overflow='hidden';
+  var p=PRODUCTS.find(function(x){return x.id===id;}); if(!p) return;var __sy=window.scrollY||document.documentElement.scrollTop;document.body.dataset.scrollY=__sy;document.body.style.position='fixed';document.body.style.top='-'+__sy+'px';document.body.style.width='100%';
   var descHtml=p.description? '<div class="desc-text">'+p.description+'</div>' : '';
   var colorsHtml=p.colors.length? '<h4>Colours</h4><div class="swatches">'+p.colors.map(function(c){return '<span class="swatch">'+c+'</span>';}).join('')+'</div>' : '';
   var sizesHtml=p.sizes.length? '<h4>Sizes</h4><div class="swatches">'+p.sizes.map(function(s){return '<span class="swatch">'+s+'</span>';}).join('')+'</div>' : '';
@@ -156,7 +156,7 @@ function openModal(id){
   });});
   overlay.classList.add('open');
 }
-function closeModal(){overlay.classList.remove('open');modalBody.innerHTML='';document.body.style.overflow='';}document.addEventListener('click',function(e){var t=e.target;if(t&&t.classList&&t.classList.contains('modal-main-img')){document.getElementById('lightboxImg').src=t.src;document.querySelector('.lightbox').classList.add('open');}if(t&&t.classList&&(t.classList.contains('lightbox-close')||t.classList.contains('lightbox'))){document.querySelector('.lightbox').classList.remove('open');}});
+function closeModal(){overlay.classList.remove('open');modalBody.innerHTML='';var __sy2=parseInt(document.body.dataset.scrollY||'0',10);document.body.style.position='';document.body.style.top='';document.body.style.width='';window.scrollTo(0,__sy2);}document.addEventListener('click',function(e){var t=e.target;if(t&&t.classList&&t.classList.contains('modal-main-img')){document.getElementById('lightboxImg').src=t.src;document.querySelector('.lightbox').classList.add('open');}if(t&&t.classList&&(t.classList.contains('lightbox-close')||t.classList.contains('lightbox'))){document.querySelector('.lightbox').classList.remove('open');}});
 document.getElementById('modalClose').addEventListener('click',closeModal);
 overlay.addEventListener('click',function(e){if(e.target===overlay)closeModal();});
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
