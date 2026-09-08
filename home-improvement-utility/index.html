@@ -67,7 +67,7 @@ footer .foot-links a:hover{color:var(--accent);border-color:var(--accent);}
 @media (max-width:860px){.grid{grid-template-columns:repeat(2,1fr);} .logo{font-size:42px;}}
 @media (max-width:720px){.modal-body{grid-template-columns:1fr;} .overlay{padding:0;align-items:flex-end;} .modal{max-height:94vh;border-radius:14px 14px 0 0;} .modal-media,.modal-info{padding:22px;} .thumbs{flex-wrap:nowrap;overflow-x:auto;} .thumbs img{flex:0 0 auto;}}
 @media (max-width:520px){.grid{grid-template-columns:1fr 1fr;gap:22px 14px;} .wrap{padding:40px 16px 26px;} .logo{font-size:34px;} .cat-btn{font-size:12px;padding:8px 2px;} #search{width:150px;font-size:16px;}}
-.modal-media,.modal-info{min-width:0;}@media (max-width:720px){.modal-body{grid-template-columns:minmax(0,1fr);}}.modal-main-img{touch-action:pan-y;}</style>
+.modal-media,.modal-info{min-width:0;}@media (max-width:720px){.modal-body{grid-template-columns:minmax(0,1fr);}}.modal-main-img{touch-action:pan-y;}.shipping-box{margin-top:26px;padding:14px 16px;background:rgba(139,111,71,.08);border-left:2px solid var(--accent);}.shipping-title{font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px;}.shipping-text{font-size:11.5px;line-height:1.6;color:var(--muted);}</style>
 </head>
 <body><a class="back-fab" href="/">← Catalogues</a><div class="lightbox"><button class="lightbox-close">×</button><a class="back-fab lightbox-back" href="/" style="z-index:2001;">← Catalogues</a><img id="lightboxImg" src=""></div>
 <div class="wrap">
@@ -139,9 +139,10 @@ function openModal(id){
   var descHtml=p.description? '<div class="desc-text">'+p.description+'</div>' : '';
   var colorsHtml=p.colors.length? '<h4>Colours</h4><div class="swatches">'+p.colors.map(function(c){return '<span class="swatch">'+c+'</span>';}).join('')+'</div>' : '';
   var sizesHtml=p.sizes.length? '<h4>Sizes</h4><div class="swatches">'+p.sizes.map(function(s){return '<span class="swatch">'+s+'</span>';}).join('')+'</div>' : '';
+  var shippingHtml='<div class="shipping-box"><div class="shipping-title">Shipping &amp; Pricing</div><div class="shipping-text">This product can be shipped via both sea and air freight, depending on order size and urgency; shipping charges are not included in the estimated cost. Final pricing may vary based on shipping method, destination, order quantity and product customization.</div></div>';
   modalBody.innerHTML='<div class="modal-media"><img class="modal-main-img" id="mainImg" src="'+p.images[0]+'" alt="'+p.name+'"><div class="thumbs" id="thumbs"></div></div>'
     +'<div class="modal-info"><div class="serial">'+p.serial+'</div><h2>'+p.name+'</h2>'
-    +descHtml+colorsHtml+sizesHtml
+    +descHtml+colorsHtml+sizesHtml+shippingHtml
     +'<a class="wa-btn" href="'+waLink(p)+'" target="_blank" rel="noopener">Enquire on WhatsApp</a>'
     +'<div class="enquire-note">Price on request. Tapping the button opens WhatsApp with this style\'s link pre-filled so our team can quote you directly.</div></div>';
   var thumbsEl=modalBody.querySelector('#thumbs'), mainImg=modalBody.querySelector('#mainImg');
