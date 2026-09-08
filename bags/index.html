@@ -74,7 +74,7 @@ footer .foot-links a:hover{color:var(--accent);border-color:var(--accent);}
 @media (max-width:520px){.grid{grid-template-columns:1fr 1fr;gap:22px 14px;} .wrap{padding:40px 16px 26px;} .logo{font-size:34px;} .cat-btn{font-size:12px;padding:8px 2px;} #search{width:150px;font-size:16px;}}
 </style>
 </head>
-<body><a class="back-fab" href="/">← Catalogues</a><div class="lightbox"><button class="lightbox-close">×</button><img id="lightboxImg" src=""></div>
+<body><a class="back-fab" href="/">← Catalogues</a><div class="lightbox"><button class="lightbox-close">×</button><a class="back-fab lightbox-back" href="/" style="z-index:2001;">← Catalogues</a><img id="lightboxImg" src=""></div>
 <div class="wrap">
   <header>
     <div class="logo"><em>Ameck</em><b>House</b></div>
@@ -103,9 +103,9 @@ footer .foot-links a:hover{color:var(--accent);border-color:var(--accent);}
     </div>
   </footer>
 </div>
-<div class="overlay" id="overlay">
+<div class="overlay" id="overlay"><button class="modal-close" id="modalClose">&times;</button>
   <div class="modal">
-    <button class="modal-close" id="modalClose">&times;</button>
+    
     <div class="modal-body" id="modalBody"></div>
   </div>
 </div>
