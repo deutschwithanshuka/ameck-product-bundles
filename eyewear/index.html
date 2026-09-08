@@ -316,7 +316,7 @@
   }
 </style>
 </head>
-<body><a class="back-fab" href="/">← Catalogues</a><div class="lightbox"><button class="lightbox-close">×</button><img id="lightboxImg" src=""></div>
+<body><a class="back-fab" href="/">← Catalogues</a><div class="lightbox"><button class="lightbox-close">×</button><a class="back-fab lightbox-back" href="/" style="z-index:2001;">← Catalogues</a><img id="lightboxImg" src=""></div>
 
 <div class="wrap">
   <header>
@@ -353,9 +353,9 @@
   </footer>
 </div>
 
-<div class="overlay" id="overlay">
+<div class="overlay" id="overlay"><button class="modal-close" id="modalClose">&times;</button>
   <div class="modal">
-    <button class="modal-close" id="modalClose">&times;</button>
+    
     <div class="modal-body" id="modalBody"></div>
   </div>
 </div>
