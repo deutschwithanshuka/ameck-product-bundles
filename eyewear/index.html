@@ -316,7 +316,14 @@
   }
 
 .modal-media,.modal-info{min-width:0;}@media (max-width:720px){.modal-body{grid-template-columns:minmax(0,1fr);}}
-.shipping-box{margin-top:26px;padding:14px 16px;background:rgba(139,111,71,.08);border-left:2px solid var(--accent);}.shipping-title{font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px;}.shipping-text{font-size:11.5px;line-height:1.6;color:var(--muted);}.modal-main-img{touch-action:pan-y;}</style>
+.shipping-box{margin-top:26px;padding:14px 16px;background:rgba(139,111,71,.08);border-left:2px solid var(--accent);}.shipping-title{font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px;}.shipping-text{font-size:11.5px;line-height:1.6;color:var(--muted);}.modal-main-img{touch-action:pan-y;}
+/* category tabs styled as tappable pills */
+.cats{gap:10px;}
+.cat-btn{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:10px 18px;color:var(--muted);transition:background .18s,color .18s,border-color .18s;-webkit-tap-highlight-color:transparent;}
+.cat-btn:hover{background:#FFFDF9;border-color:var(--accent);color:var(--ink);}
+.cat-btn.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+@media (max-width:720px){.cats{gap:8px;}.cat-btn{font-size:11.5px;padding:9px 15px;}}
+</style>
 </head>
 <body><a class="back-fab" href="/">← Catalogues</a><div class="lightbox"><button class="lightbox-close">×</button><a class="back-fab lightbox-back" href="/" style="z-index:2001;">← Catalogues</a><img id="lightboxImg" src=""></div>
 
