@@ -258,6 +258,9 @@ footer .sub{margin-top:8px;font-size:11px;letter-spacing:2px;text-transform:uppe
 footer .foot-links{margin-top:18px;display:flex;justify-content:center;gap:22px;flex-wrap:wrap;padding-bottom:34px;}
 footer .foot-links a{font-size:12px;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px;transition:border-color .15s,color .15s;}
 footer .foot-links a:hover{color:var(--accent);border-color:var(--accent);}
+
+/* keep the decorative hero glow from making the page scroll sideways on phones */
+html,body{max-width:100%;overflow-x:hidden;overflow-x:clip;}
 </style>
 </head>
 <body>
