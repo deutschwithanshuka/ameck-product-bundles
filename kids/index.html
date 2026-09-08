@@ -180,7 +180,7 @@ const KIDS_SHIPPING_NOTE = 'Kids products can be shipped via both sea and air fr
 const grid=document.getElementById('grid'),catsEl=document.getElementById('cats'),searchEl=document.getElementById('search'),overlay=document.getElementById('overlay'),modalBody=document.getElementById('modalBody');
 let activeCat='All';
 function waLink(p){
-var productUrl='https://ameckhouse.com/products/'+p.handle;
+var productUrl='https://catalogue.ameckhouse.com/kids/?product='+encodeURIComponent(p.handle);
 var msg=encodeURIComponent("Hi Ameck House, I'd like the wholesale price for "+p.serial+" - "+p.name+". "+productUrl);
 return 'https://wa.me/'+WA+'?text='+msg;
 }
@@ -228,7 +228,7 @@ document.getElementById('modalClose').addEventListener('click',closeModal);
 overlay.addEventListener('click',function(e){if(e.target===overlay)closeModal();});
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
 searchEl.addEventListener('input',renderGrid);
-renderCats(); renderGrid();
+renderCats(); renderGrid();(function(){var qp=new URLSearchParams(location.search);var h=qp.get('product');if(h){var pp=PRODUCTS.find(function(x){return x.handle===h;});if(pp) openModal(pp.id);}})();
 </script>
 </body>
 </html>
