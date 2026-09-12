@@ -29,6 +29,15 @@ Each catalogue is one self contained `index.html`: HTML, CSS and JavaScript all 
 5. Put the photo links in the `images` list. Photos are uploaded to Shopify Files, we do not create Shopify products any more.
 6. Commit. The live site updates in a minute or two.
 
+## Photo rules
+
+The first image in the images list is the cover, and it is the only thing a customer sees before they tap.
+
+1. The cover must be a plain photo of the product on a clean background. No text, no arrows, no icons, no price tags, no collage.
+2. Plain photos come first, ideally one per colour variant. Informative images such as feature graphics, spec tables, dimension charts and detail collages are welcome, they just go further down the list.
+3. Never use an image with Chinese text, another brand name or another seller watermark, in any position.
+4. If there is no clean photo at all, use the photos coming soon placeholder and request the photo in the photopilot channel. A bad cover is worse than no cover.
+
 ## Things that happen automatically, do not do them by hand
 
 - **The Shipping and Pricing note.** Every product shows it on its own. Do not paste it into the description, it would appear twice. The wording is deliberately generic, "This product can be ...", so it works for every catalogue. Please do not change it to a category name.
