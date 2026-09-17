@@ -57,4 +57,6 @@ Optional: a product can carry its own `shippingNote` to override the default not
 - `home-decor` and `home-improvement-utility` both use the **HD** prefix, and HD-001 to HD-005 are the same five products listed in both catalogues. Edit a product in one and it will not change in the other. Worth cleaning up.
 - GitHub Pages serves the old version for a minute or two after a commit. If a change looks missing, wait and hard refresh before assuming it failed.
 - In the GitHub web editor, the "Commit changes..." button sometimes does nothing on the first click. Click it again.
+- The Pages deploy job sometimes fails on its own with a token permission error even though the build passed. The site then keeps serving the old version. Re-running the job does not help, one more small commit does.
 
+- The Pages deploy job sometimes fails on its own with a token permission error even though the build passed. The site then keeps serving the old version. Re-running the job does not help. Make one more small commit and it deploys.
